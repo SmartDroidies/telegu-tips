@@ -5,8 +5,24 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="AdmobPlugin">
+        <param name="android-package" value="com.admob.cordova.plugin.AdmobAdPlugin" />
+    </feature>
     <allow-intent href="market:*" />
-    <name>TeleguTips</name>
+    <icon density="ldpi" src="res/android/telugutips_ldpi.png" />
+    <icon density="mdpi" src="res/android/telugutips_mdpi.png" />
+    <icon density="hdpi" src="res/android/telugutips_hdpi.png" />
+    <icon density="xhdpi" src="res/android/telugutips_xhdpi.png" />
+    <icon density="xxhdpi" src="res/android/telugutips_xxhdpi.png" />
+    <icon density="xxxhdpi" src="res/android/telugutips_xxxhdpi.png" />
+    <name>Telegu Tips</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>

@@ -1,0 +1,14 @@
+<div class="tip" ng-swipe-left="older({{index}})" ng-swipe-right="newer({{index}})">
+	<input type="hidden" id="sequence" ng-model="tip.position"/></input>
+	<input type="hidden" ng-model="tip.size"/></input>
+	<h4 id="tip-title" class="tip-head"><span ng-bind-html="tip.title"></span></h4>
+	<!--span class="article-date">{{article.publishedDate |  toLongDate}}</span--> 
+	<!--tip-content></tip-content-->
+	<div class="tip-content" format-content ng-bind-html="tip.contentHtml"></div>
+	<!--pre class="tip-content" ng-bind-html="tip.content" ></pre-->
+</div>	
+<nav class="navbar navbar-default navbar-fixed-bottom footer">
+	<div class="position">{{ 'TIP' | translate }} {{tip.position}} of {{tip.size}}</div>
+	<!--a href="#" ng-click="share()"><img alt="Share" src="images/share.png"/> </a-->
+</nav>
+

@@ -1,0 +1,323 @@
+/* Global Styling */
+body, h1, h2, h3, h4, h5, h6  {
+    font-family: Helvetica, Arial, sans-serif!important;
+}
+
+/* Head Style */
+h3 {	
+	font-size : 18px;
+	text-decoration : bold;
+}
+
+/* Header Icon */
+.app-logo {
+  height : 40px;
+  padding-right : 5px;
+  margin : auto;
+  margin : 5px;
+}
+
+.app-head , .menu-icon {
+	padding-left : 5px;
+	padding-top : 10px;
+	padding-bottom : 5px;
+	margin : auto;
+}
+
+.app-head {
+	text-align : center;
+}
+
+/* Main Div Styling */
+.content, .menu, .setting {
+  padding: 50px 0 0 0;
+}
+
+.content {
+	margin-bottom : 50px;
+	height: 100%;
+    overflow-y: scroll;	
+}
+
+.shaded {
+	/* background-color: #d9edf7; */
+}
+
+snap-content  {
+  background-color: #fff;
+  border-left: 1px solid #ccc;
+}
+
+snap-drawer  {
+  background-color: #d9edf7;
+}
+
+/* Align Nav Section */
+.nav-section {
+	margin : auto;
+	text-align : center;
+	margin-top : 20px;
+}
+
+.alert {
+	margin: 10px 10px 10px 10px;
+  	padding: 20px 10px 20px 10px;	
+}
+
+/* List group item */
+.list-group {
+  /* margin-top : 20px; */
+}
+
+.list-group-item {
+  padding : 5px;
+}
+
+.list-group-item-heading {
+	font-size : 18px;
+}
+
+.list-group-item-text {
+	font-size : 16px;
+}
+
+/* Article Styling */
+.tip-list, .tip  {
+	margin : 3px;
+}
+
+.tip {
+	 margin-bottom : 30px; 
+}	
+
+#tip-snippet {
+	display: table-cell;
+    width: 90%;
+	vertical-align: top;	
+}
+
+.nav_link  {
+	font-size : 16px;
+	font-weight: bold;
+	color : #0376B0;
+}
+
+.cat_link  {
+	font-size : 16px;
+	font-weight: bold;
+	color : #0376B0;
+	text-decoration : none;
+	margin-left: 50px;
+}
+
+.tip-head {
+	font-size : 18px;
+	padding-left : 5px;
+	text-align: center;
+}
+
+.tip-content {
+	font-size : 16px;
+	padding : 5px;
+	text-align: center;
+}
+
+.tip-content a {
+    margin-bottom: 20px;
+    display: block;
+}
+
+#share_link {
+  position : absolute;
+  right : 10px;
+  top : 10px;
+}
+
+.share {
+	display : none;
+} 
+
+.tip-listitem-content {
+	display: table-cell;
+    width: 90%;
+	vertical-align: middle;	
+}
+
+.tip-listitem-icon {
+	display: table-cell;
+    width: 100px;
+	margin-left : 10px;
+	height : 70px;
+}
+
+.tip-icon-img {
+	width: 100px;
+	height : 70px;
+}
+
+/*
+a.nav_link:hover, a.nav_link:visited, a.nav_link:active {
+    color: #FF00FF;
+}
+*/
+
+.menu-control {
+	position : absolute;
+	left : 5px;
+	top : 5px;
+	height: 36px;
+  	width: 38px;
+}
+
+.setting-control {
+	position : absolute;
+	right : 5px;
+	top : 8px;
+	height: 33px;
+  	width: 30px;
+}
+
+
+.head_section {
+	margin: 5px 5px 5px 50px;
+	vertical-align: middle;
+	height: 100%;	
+}
+
+.main-title {
+	color: #1F1F1F;
+	font-size: 20px;
+	font-weight: bold;	
+	margin: 2px;
+	padding: 10px 0px 0px 5px;
+}
+
+/* Menu Styling */
+#menu  {
+	background: #d9edf7;
+	box-shadow: 5px 5px 5px #5F8496;	
+	position: absolute;
+	top: 0px;
+	z-index: 99;
+	display : none; 
+}
+
+#menu ul li {
+	border-bottom: 1px Solid #bce8f1;
+}
+
+#menu ul li  a {
+	font-size: 16px;
+	color: #245269;	
+	padding-right: 10px;
+	font-weight: bold;
+}
+
+#menu ul li.nav-header {
+	font-size: 22px;
+	padding: 10px;
+	color: #1F1F1F;	
+	font-weight : bold;
+	background: #ACACAC;
+}
+
+/* Setting Styling */
+#setting  {
+	background: #d9edf7;
+	box-shadow: 5px 5px 5px #5F8496;	
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 98;
+	display : none; 
+}
+
+#setting ul li {
+	border-bottom: 1px Solid #C3C4BF;	
+}
+
+#setting ul li  a {
+	font-size: 20px;
+	color: #245269;	
+	padding-right: 20px;
+}
+
+#setting ul li.nav-header {
+	font-size: 22px;
+	padding: 10px;
+	color: #1F1F1F;	
+	font-weight : bold;
+	background: #ACACAC;
+}
+
+
+#app-status-div {
+	display : none;
+}
+
+/* Category Menu Styling */
+.ctgry {
+	position: relative;
+	min-height: 60px;
+}
+
+.ctgryIcon {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	left: 0px;
+	top: 0px;
+	padding: 5px;	
+}
+
+.right-icon {
+	right : 5px;
+}
+
+.ctgryDesc {
+	min-height : 70px;
+	padding-top: 15px;
+} 
+
+.ctgryDesc h3 {
+  	font-size: 18px;
+  	font-weight: bold;
+  	text-align: center;
+  	margin-top: 10px;	
+}
+
+.right-content  {
+	margin-left: 80px;
+}
+
+.left-content  {
+	margin-right: 90px;
+	text-align: right;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #f5f5f5;
+  margin: 0 auto;
+}
+
+div.position {
+	vertical-align: middle;
+	width: 90%;
+	text-align: center;
+	margin: auto;
+	font-size : 20px;
+	font-weight : bold;
+	margin: 7px;
+}	
+
+
+body > .content {
+  overflow: scroll;
+  height: 100%;
+}

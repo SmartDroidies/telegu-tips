@@ -1,0 +1,14 @@
+<!--Body content-->
+<div >
+	<div class="list-group tip-list" ng-repeat="tip in tips">
+		<a href="#/tip/{{category}}/{{$index}}" class="list-group-item">
+			<div class="tip-listitem-content">
+				<h4 class="list-group-item-heading"><span ng-bind-html="tip.title"></span></h4>
+				<!--span class="feed-date">{{feed.publishedDate |  toLongDate}}</span--> 
+			</div>	
+			<div class="tip-listitem-icon">	
+				<p ng-bind-html="tip.content | feedicon" class="list-group-item-text" ></p>
+			</div>	
+		</a>
+	</div>	
+</div>
