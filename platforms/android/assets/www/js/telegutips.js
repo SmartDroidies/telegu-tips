@@ -80,7 +80,7 @@ function updateLanguage() {
 
 //Share the app link with user
 function share() {
-	window.plugins.socialsharing.share('Try this great Tamil App - ', '1500+ Tamil Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.tamil.tips');
+	window.plugins.socialsharing.share('Try this great Telugu App - ', 'Telugu Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.telugu.tips');
 	hidePopup();
 }
 
@@ -88,7 +88,7 @@ function share() {
 function feedback() {
 	window.plugin.email.open({
 		to:      ['tips2stayhealthy@gmail.com'],
-		subject: 'Feedback on V0.1.3',
+		subject: 'Feedback on Telugu Tips',
 		body:    '',
 		isHtml:  true
 	});
@@ -98,14 +98,13 @@ function feedback() {
 //Rate App
 function rate() {
 	var version = device.platform;
-	if(version == "Android") {
-		var url = "https://play.google.com/store/apps/details?id=com.smart.droid.tamil.tips"
-	} else {
-		//FIXME - Change this accordingly
-		var url = "https://play.google.com/store/apps/details?id=com.smart.droid.tamil.tips"
-	}
-	window.open( url, "_blank" );
 	hidePopup();
+	if(version == "Android") {
+		var url = "market://details?id=com.smart.droid.telugu.tips";
+        window.open(url,"_system");		
+	} else {
+		//var url = "https://play.google.com/store/apps/details?id=com.smart.droid.telugu.tips"
+	}
 }
 
 //Load Initial Tips
@@ -131,10 +130,10 @@ function loadInitialTips() {
 function downloadLatestTips() {
 	var message = "Synchronizing Latest Tips...";
 	var fileTransfer = new FileTransfer();
-	var uri = encodeURI("http://tamil.tips2stayhealthy.com/?json=y");
+	var uri = encodeURI("http://telugu.tips2stayhealthy.com/?json=y");
 	var lastSyncTime = window.localStorage.getItem("sync_time");
 	if(lastSyncTime) {
-		uri = encodeURI("http://tamil.tips2stayhealthy.com/?json=y&ts=" + lastSyncTime);
+		uri = encodeURI("http://telugu.tips2stayhealthy.com/?json=y&ts=" + lastSyncTime);
 	} 
 	var fileURL = cordova.file.cacheDirectory + "/tips.json";
 	//console.log("Download URL : " + uri);
