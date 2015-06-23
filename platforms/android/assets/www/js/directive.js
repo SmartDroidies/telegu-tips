@@ -9,8 +9,6 @@ telegutipsDirective.directive('formatContent', function() {
     		//console.log(element);
     		element.css({
         			position: 'relative',
-         			border: '1px solid black',
-         			backgroundColor: 'lightgrey',
          			cursor: 'pointer',
               align : 'center'
         		});

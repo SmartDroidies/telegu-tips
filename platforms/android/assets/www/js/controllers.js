@@ -8,15 +8,15 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  '_',
   function($scope, Article) {
 	//Show Home Page
 	$scope.collectStatistics = function () {    
-		//var tips = Storage.collectTips();
 		var tips = Article.fetchArticles();
 		//if (tips === undefined || tips === null) {
-			$scope.arokyam = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 5);}).size().value();
-			$scope.samayal = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 3);}).size().value();
-			$scope.naattu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 10);}).size().value();
-			$scope.azagu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 6);}).size().value();
-			$scope.kural = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 11);}).size().value();
+			//$scope.arokyam = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 5);}).size().value();
+			//$scope.samayal = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 3);}).size().value();
+			//$scope.naattu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 10);}).size().value();
+			//$scope.azagu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 6);}).size().value();
+			//$scope.kural = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 11);}).size().value();
 		//}
+		showBannerAd();
 	}; 
 	
 	$scope.loadTip = function () {       
@@ -37,7 +37,7 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', '$
   function($scope, Article, $routeParams) {
 	$scope.displayTips = function () {
 		var categoryId = $routeParams.cat;
-		console.log("Tip Category : " + categoryId);
+		//console.log("Tip Category : " + categoryId);
 		/*
 		var ctgry = Category.collectCategorty(categoryId);
 		if(ctgry) {
@@ -54,6 +54,7 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', '$
 		$scope.category = categoryId;
 		//UI Changes 
 		//$("#main-title").text(ctgry.ctgryname);
+		showBannerAd();
 		hidePopup();
 	}
 	
@@ -76,6 +77,7 @@ telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageS
 		} else {
 			console.log('Tip not found sipaly error message');
 		}
+
 	}	
 	
 	//Collecting the details of the tip
@@ -96,7 +98,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 
 	//Method to display tip detail
 	$scope.displayTipDetail = function () {         
-		console.log("Tip Category : " + $scope.categoryId);
+		//console.log("Tip Category : " + $scope.categoryId);
 		//var categoryId = $routeParams.cat;
 		//var index = $routeParams.index;
 		//console.log("Tip Category : " + categoryId);
@@ -115,6 +117,8 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 		}
 		$scope.category = $scope.categoryId;
 		$scope.size = tip.size;
+		showInterstitial();
+		hideBannerAd();
 		hidePopup();
 	}
 

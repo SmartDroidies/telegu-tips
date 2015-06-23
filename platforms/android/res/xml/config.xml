@@ -43,7 +43,7 @@
     <icon density="xhdpi" src="res/android/telugutips_xhdpi.png" />
     <icon density="xxhdpi" src="res/android/telugutips_xxhdpi.png" />
     <icon density="xxxhdpi" src="res/android/telugutips_xxxhdpi.png" />
-    <name>Telegu Tips</name>
+    <name>Telugu Tips</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>

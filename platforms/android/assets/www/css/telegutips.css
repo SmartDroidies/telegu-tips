@@ -114,6 +114,7 @@ snap-drawer  {
 	font-size : 18px;
 	padding-left : 5px;
 	text-align: center;
+	font-weight: bold;
 }
 
 .tip-content {

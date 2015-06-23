@@ -13,7 +13,7 @@ telegutipsServices.factory ('StorageService', function () {
 	var storageFactory = {}; 
 	//Collect all tips 
 	storageFactory.collectTips = function() {
-		console.log('Collecting Tips from Local Storage');
+		//console.log('Collecting Tips from Local Storage');
 		var data =  window.localStorage.getItem("tips");
 		return JSON.parse(data);
 	}

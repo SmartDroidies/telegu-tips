@@ -11,8 +11,7 @@ function onDeviceReadyAction() {
 	}
 
 	// Manage Ad
-	//showBannerAd();
-	//initializeInterAd();
+	initializeAd();
 	
 	//Handle Menu 
 	$( "#menu-cntrl" ).click(function() {
@@ -80,7 +79,7 @@ function updateLanguage() {
 
 //Share the app link with user
 function share() {
-	window.plugins.socialsharing.share('Try this great Telugu App - ', 'Telugu Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.telugu.tips');
+	window.plugins.socialsharing.share('Try this great Telugu App - ', 'Telugu Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips');
 	hidePopup();
 }
 
@@ -100,7 +99,7 @@ function rate() {
 	var version = device.platform;
 	hidePopup();
 	if(version == "Android") {
-		var url = "market://details?id=com.smart.droid.telugu.tips";
+		var url = "market://details?id=com.smart.droid.telegu.tips";
         window.open(url,"_system");		
 	} else {
 		//var url = "https://play.google.com/store/apps/details?id=com.smart.droid.telugu.tips"
@@ -164,7 +163,10 @@ function syncLocalStorage(file) {
 				//console.log(key + " - " + JSON.stringify(item));
 				var newTip = false;
 				_.find(localJSON,function(rw, rwIdx) { 
-					if(rw.id == item.id){ console.log("Replace Existing Object for : " + rw.id); newTip = true; return true;}; 
+					if(rw.id == item.id) { 
+						/* console.log("Replace Existing Object for : " + rw.id); */
+						newTip = true; return true;
+					}; 
 				});
 				//If new tip
 				if(!newTip) {
@@ -220,3 +222,50 @@ function exitAppPopup() {
     return false;
 }
 
+
+function initializeAd() {
+
+	admob.initAdmob("ca-app-pub-8439744074965483/8900243253","ca-app-pub-8439744074965483/7423510059");
+    document.addEventListener(admob.Event.onInterstitialReceive, onInterstitialReceive, false);
+    document.addEventListener(admob.Event.onInterstitialFailedReceive,onReceiveFail, false);
+    document.addEventListener(admob.Event.onBannerFailedReceive,onReceiveFail, false);
+
+	//admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_APP); 
+    admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
+
+    admob.cacheInterstitial();
+
+}
+
+//Load AdMob Interstitial Ad
+function showInterstitial(){
+    admob.isInterstitialReady(function(isReady){
+        if(isReady){
+            admob.showInterstitial();
+        }
+    });
+}
+
+function onInterstitialReceive (message) {
+    //alert(message.type + " ,you can show it now");
+    //admob.showInterstitial();//show it when received
+}
+
+function onReceiveFail (message) {
+ 	var msg=admob.Error[message.data];
+    if(msg==undefined){
+       msg=message.data;
+    }
+    //console.log("load fail: " + message.type + "  " + msg);
+} 
+
+
+function showBannerAd() {
+	//show banner at the bottom center
+	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
+}
+
+function hideBannerAd() {
+	//show banner at the bottom center
+	admob.hideBanner();
+}
