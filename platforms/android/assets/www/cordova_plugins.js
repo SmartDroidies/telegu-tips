@@ -20,13 +20,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
-        "id": "com.admob.plugin.AdmobAd",
-        "clobbers": [
-            "window.admob"
-        ]
-    },
-    {
         "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
         "id": "nl.x-services.plugins.socialsharing.SocialSharing",
         "clobbers": [
@@ -81,6 +74,13 @@ module.exports = [
         "id": "org.apache.cordova.inappbrowser.inappbrowser",
         "clobbers": [
             "window.open"
+        ]
+    },
+    {
+        "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
+        "id": "com.admob.plugin.AdmobAd",
+        "clobbers": [
+            "window.admob"
         ]
     },
     {
@@ -235,7 +235,6 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.0.0",
     "org.apache.cordova.file-transfer": "0.5.0",
-    "com.admob.plugin": "5.0.1",
     "nl.x-services.plugins.socialsharing": "4.3.18",
     "com.phonegap.plugins.PushPlugin": "2.4.0",
     "de.appplant.cordova.plugin.email-composer": "0.8.2",
@@ -243,6 +242,7 @@ module.exports.metadata =
     "org.apache.cordova.device": "0.3.0",
     "org.apache.cordova.dialogs": "0.3.0",
     "org.apache.cordova.inappbrowser": "0.6.0",
+    "com.admob.plugin": "5.0.1",
     "org.apache.cordova.file": "1.3.3"
 }
 // BOTTOM OF METADATA

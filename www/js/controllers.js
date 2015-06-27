@@ -62,22 +62,23 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', '$
 	$scope.displayTips();
 }]);
 
-telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService',  
-  function($scope, $routeParams, Storage) {
+telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService',  '$http', '$location',
+  function($scope, $routeParams, Storage, $http, $location) {
 	$scope.loadTip = function () {       
-		var tips = Storage.collectTips();
-		if (!angular.isUndefined(tips) && !angular.isUndefined($routeParams.id)) {
-			for (var i = 0, len = tips.length; i < len; i++) {
-				var tip = tips[i];
-				if (tip.id == $routeParams.id) {
-					$scope.tip = tip;
-					break;
-				}
-			};
-		} else {
-			console.log('Tip not found sipaly error message');
-		}
-
+		window.plugins.spinnerDialog.show();
+		$("#footer").hide();
+		$http.get('http://telugu.tips2stayhealthy.com/?json=y&id=' + $routeParams.id).
+    	    success(function(data) {
+    	    	//console.log("JSON Data : " + JSON.stringify(data));	
+    	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
+            		$scope.tip = data.tips[0];
+            		window.plugins.spinnerDialog.hide();
+            	} else {
+            		//console.log("JSON Data : " + JSON.stringify(data));
+            		window.plugins.spinnerDialog.hide();
+            		$location.path('/home');  
+            	}
+    		})		
 	}	
 	
 	//Collecting the details of the tip

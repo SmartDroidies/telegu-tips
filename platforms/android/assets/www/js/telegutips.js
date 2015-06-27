@@ -52,31 +52,6 @@ function hideSetting() {
 }
 
 
-$(document).ready(function() {
-	loadBundles('tn');
-});
-
-function loadBundles(lang) {
-	jQuery.i18n.properties({
-		name:'Messages', 
-		path:'bundle/', 
-		mode:'both',
-		language:lang, 
-		callback: function() {
-			updateLanguage();
-		}
-	});
-}
-
-function updateLanguage() {
-	$(".i18n").each(function(i, element){
-		if(element.tagName == "input")
-			$(element).val(jQuery.i18n.prop(element.id));
-		else
-			$(element).html(jQuery.i18n.prop(element.id));
-	});		
-}
-
 //Share the app link with user
 function share() {
 	window.plugins.socialsharing.share('Try this great Telugu App - ', 'Telugu Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips');
@@ -210,7 +185,7 @@ document.addEventListener("backbutton", function() {
 
 function exitAppPopup() {
     navigator.notification.confirm(
-          'Exit 1500+ Tamil Tips'
+          'Exit Telugu Tips'
         , function(button) {
               if (button == 2) {
                   navigator.app.exitApp();
@@ -230,7 +205,6 @@ function initializeAd() {
     document.addEventListener(admob.Event.onInterstitialFailedReceive,onReceiveFail, false);
     document.addEventListener(admob.Event.onBannerFailedReceive,onReceiveFail, false);
 
-	//admob.showBanner(admob.BannerSize.BANNER,admob.Position.TOP_APP); 
     admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
 
     admob.cacheInterstitial();
