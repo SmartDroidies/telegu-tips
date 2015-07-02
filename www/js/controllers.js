@@ -62,8 +62,8 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', '$
 	$scope.displayTips();
 }]);
 
-telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService',  '$http', '$location',
-  function($scope, $routeParams, Storage, $http, $location) {
+telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService',  '$http', '$location', '$interval',
+  function($scope, $routeParams, Storage, $http, $location, $interval) {
 	$scope.loadTip = function () {       
 		window.plugins.spinnerDialog.show();
 		$("#footer").hide();
@@ -73,6 +73,7 @@ telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageS
     	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
             		$scope.tip = data.tips[0];
             		window.plugins.spinnerDialog.hide();
+            		$interval(showInterstitial, 5000);
             	} else {
             		//console.log("JSON Data : " + JSON.stringify(data));
             		window.plugins.spinnerDialog.hide();
