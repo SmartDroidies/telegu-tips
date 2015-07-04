@@ -236,10 +236,14 @@ function onReceiveFail (message) {
 
 function showBannerAd() {
 	//show banner at the bottom center
-	admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
+	if(typeof admob !== "undefined") {
+		admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
+	}	
 }
 
 function hideBannerAd() {
 	//show banner at the bottom center
-	admob.hideBanner();
+	if(admob) {
+		admob.hideBanner();
+	}	
 }
