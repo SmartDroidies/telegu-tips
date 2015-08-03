@@ -16,7 +16,6 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  '_',
 			//$scope.azagu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 6);}).size().value();
 			//$scope.kural = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 11);}).size().value();
 		//}
-		showBannerAd();
 	}; 
 	
 	$scope.loadTip = function () {       
@@ -54,7 +53,6 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', '$
 		$scope.category = categoryId;
 		//UI Changes 
 		//$("#main-title").text(ctgry.ctgryname);
-		showBannerAd();
 		hidePopup();
 	}
 	
@@ -120,7 +118,6 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 		$scope.category = $scope.categoryId;
 		$scope.size = tip.size;
 		showInterstitial();
-		hideBannerAd();
 		hidePopup();
 	}
 

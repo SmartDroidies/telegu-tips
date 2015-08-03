@@ -50,7 +50,7 @@ telugutipsApp.config(function ($translateProvider) {
           TIP:'Tip'
         });
         $translateProvider.translations('te', {
-          TITLE: 'Telugu Tips',
+          TITLE: '\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41 \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
           HOME: '\u0c39\u0c4b\u0c2e\u0c4d',
 		  HEALTH_TIPS: '\u0c06\u0c30\u0c4b\u0c17\u0c4d\u0c2f\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
 		  COOKING_TIPS: '\u0c35\u0c02\u0c1f\u0c3f\u0c02\u0c1f\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41', 
