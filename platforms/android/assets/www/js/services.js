@@ -146,3 +146,56 @@ telegutipsServices.factory ('ArticleService', function (StorageService, _, cache
     }
     return factory;
 }); 
+
+
+//Factory for managing category
+telegutipsServices.factory ('CategoryService', function (_, cacheService, $http, $q) {
+	var factory = {}; 
+
+	//Load Categories into Cache
+	factory.loadCategories = function() {
+		//console.log('Load Categories From Filesystem');
+		return $http.get('files/category.json');
+	}
+
+	//Collect Categories from cache
+	factory.collectCategories = function() {
+		var deferred = $q.defer();
+		var key = 'tt-categories';
+		var categories = cacheService.get(key);
+		if(!categories) {
+			var promise = this.loadCategories();
+       		promise.then(
+          		function(payload) { 
+              		categories = payload.data;
+					if(categories) {
+						cacheService.put(key, categories);
+					}
+              		deferred.resolve({categories: categories});
+					//console.log('Categories ' + JSON.stringify(categories));
+          		},
+          		function(errorPayload) {
+          			console.log('Failure loading movie ' + errorPayload);
+          			deferred.reject(errorPayload);
+          		});
+		} else {
+			deferred.resolve({categories: categories});
+		}
+		return deferred.promise;
+	} 
+
+	//Collect Category for an ID
+	factory.collectCategory = function(catID) {
+		var key = 'tt-categories';
+		var categories = cacheService.get(key);
+		var category = {};
+		if(categories) {
+			category = _.find(categories, function(ctgry) { 
+				return ctgry.id == catID; 
+			});
+		} 
+		return category;
+	} 
+
+    return factory;
+}); 

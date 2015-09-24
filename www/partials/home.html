@@ -1,28 +1,68 @@
-<div id="main" class="nav-section ui-page-active" data-role="page">
+
+<div class="main">
+
+    <!-- Header -->
+    <nav class="navbar navbar-fixed-top nav-telugu" role="navigation">
+      <div class="navbar-header main-header">
+        <img id="menu-cntrl" class="menu-control" src="images/menu.png"/>
+        <div class="head_section">
+          <h2  id="main-title" class="main-title">{{ 'TITLE' | translate }}</h2>
+        </div>
+        <img id="setting-cntrl" class="setting-control" src="images/setting.png"/>
+      </div>
+    </nav>
+
+	<div id="main" class="nav-section ui-page-active" data-role="page">
+		<div ng-repeat="ctgry in categories" class="alert ctgry" role="alert">
+		  <img class="ctgryIcon" src="{{ctgry.imageUrl}}"/>
+		  <a href="#/tips/{{ctgry.id}}" class="cat_link alert-link">{{ ctgry.code | translate }}</a>
+		</div>
+	</div>
+
+</div>
+
+<!-- Left Main Menu -->
+<div id="menu" class="menu">
+  <ul class="nav nav-list">
+    <li><a href="#/home" onclick="hidePopup()">{{ 'HOME' | translate }}</a></li>         
+    <li><a href="#/tips/2" onclick="hidePopup()">{{ 'HEALTH_TIPS' | translate }}</a></li>
+    <li><a href="#/tips/1" onclick="hidePopup()">{{ 'BEAUTY_TIPS' | translate }}</a></li>
+    <li><a href="#/tips/5" onclick="hidePopup()">{{ 'HOME_REMEDIES' | translate }}</a></li>
+    <li><a href="#/tips/4" onclick="hidePopup()">{{ 'COOKING_TIPS' | translate }}</a></li>
+    <li><a href="#/tips/3" onclick="hidePopup()">{{ 'HOME_TIPS' | translate }}</a></li>
+  </ul>
+</div>
+
+<!-- Settings Menu -->
+<div id="setting" class="setting">
+  <ul class="nav nav-list">
+      <li><a href="#share" onclick="share()">Share</a></li>
+      <li><a href="#rate" onclick="rate()">Rate Me</a></li>
+      <li><a href="#feedback" onclick="feedback()">Feedback</a></li>
+  </ul>
+</div>
+
+
+<!--div id="main" class="nav-section ui-page-active" data-role="page">
 	<div class="alert ctgry" role="alert">
 	  <img class="ctgryIcon" src="images/health_tips.png"/>
 	  <a href="#/tips/2" class="cat_link alert-link">{{ 'HEALTH_TIPS' | translate }}</a>
-	  <!--span class="badge badge-info">{{arokyam}}</span-->
 	</div>
 	<div class="alert ctgry" role="alert">
 	  <img class="ctgryIcon" src="images/beauty_tips.png"/>
 	  <a href="#/tips/1" class="cat_link alert-link">{{ 'BEAUTY_TIPS' | translate }}</a>
-	  <!--span class="badge badge-info">{{naattu}}</span-->
 	</div>
 	<div class="alert ctgry" role="alert">
 	  <img class="ctgryIcon" src="images/home_remedies.png"/>
 	  <a href="#/tips/5" class="cat_link alert-link">{{ 'HOME_REMEDIES' | translate }}</a>
-	  <!--span class="badge badge-info">{{azagu}}</span-->
 	</div>
 	<div class="alert ctgry" role="alert">
 	  <img class="ctgryIcon" src="images/cooking_tips.png"/>
 	  <a href="#/tips/4" class="cat_link alert-link">{{ 'COOKING_TIPS' | translate }}</a>
-	  <!--span class="badge badge-info">{{samayal}}</span-->
 	</div>
 	<div class="alert ctgry" role="alert">
 	  <img class="ctgryIcon" src="images/home_tips.png"/>
 	  <a href="#/tips/3" class="cat_link alert-link">{{ 'HOME_TIPS' | translate }}</a>
-	  <!--span class="badge badge-info">{{kural}}</span-->
 	</div>
-</div>
+</div-->
 

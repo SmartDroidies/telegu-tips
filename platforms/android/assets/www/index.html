@@ -28,63 +28,49 @@
 <body >
     
     <!-- Header -->
-    <nav class="navbar navbar-default navbar-fixed-top nav-telugu" role="navigation">
+    <!--nav class="navbar navbar-default navbar-fixed-top nav-telugu" role="navigation">
       <div class="container-fluid">
       <div class="navbar-header main-header">
         <img id="menu-cntrl" class="menu-control" src="images/menu.png"/>
         <div class="head_section">
-          <!--img id="title" class="img-title" src="images/title.png"/-->
           <h2  id="main-title" class="main-title">{{ 'TITLE' | translate }}</h2>
-          <!--h3 id="category-text" class="main-sub-title">Healthy Tips</h3-->
         </div>
         <img id="setting-cntrl" class="setting-control" src="images/setting.png"/>
       </div>
       </div>
-    </nav>
+    </nav-->
 
     <!--Body content-->
     <div ng-view class="content">
     </div>
 
     <!-- Left Main Menu -->
-    <div id="menu" class="menu">
+    <!--div id="menu" class="menu">
       <ul class="nav nav-list">
         <li><a href="#/home" onclick="hidePopup()">{{ 'HOME' | translate }}</a></li>         
-        <!--li class="nav-header">Home</li-->
         <li><a href="#/tips/2" onclick="hidePopup()">{{ 'HEALTH_TIPS' | translate }}</a></li>
         <li><a href="#/tips/1" onclick="hidePopup()">{{ 'BEAUTY_TIPS' | translate }}</a></li>
         <li><a href="#/tips/5" onclick="hidePopup()">{{ 'HOME_REMEDIES' | translate }}</a></li>
         <li><a href="#/tips/4" onclick="hidePopup()">{{ 'COOKING_TIPS' | translate }}</a></li>
         <li><a href="#/tips/3" onclick="hidePopup()">{{ 'HOME_TIPS' | translate }}</a></li>
       </ul>
-    </div>
+    </div-->
 
     <!-- Settings Menu -->
-    <div id="setting" class="setting">
+    <!--div id="setting" class="setting">
       <ul class="nav nav-list">
           <li><a href="#share" onclick="share()">Share</a></li>
           <li><a href="#rate" onclick="rate()">Rate Me</a></li>
           <li><a href="#feedback" onclick="feedback()">Feedback</a></li>
       </ul>
-    </div>
+    </div-->
 
-    <!--Body content-->
-    <div class="container-fluid">
-      <div id="loadingWidget" class="row-fluid ui-corner-all">
-        <div class="loadingContent">
-          <!--img id="loader" alt="Loading  Content" src="images/ajax-loader.gif" /--> 
-        </div>
-      </div>
-      <div id="popup-error" class="row-fluid ui-corner-all error">
-        <p id="popup-content" class="error-content"></p>
-      </div>        
-    </div>  
     <!-- Div to display status -->  
-    <div id="app-status-div">
+    <!--div id="app-status-div">
       <ul id="app-status-ul">
         <li>Cordova PushNotification Plugin Demo</li>
       </ul>
-    </div>
+    </div-->
 
 </body>
 </html>

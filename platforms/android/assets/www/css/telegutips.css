@@ -348,3 +348,27 @@ a.list-group-item .list-group-item-heading {
 a:hover, a:focus {
   color: #640000;
 }
+
+.main-title-tip {
+	color: #640000;
+	font-size: 16px;
+	font-weight: bold;	
+	margin: 2px;
+	padding: 10px 0px 0px 5px;
+}
+
+
+.main-title-tips {
+	color: #640000;
+  	font-size: 20px;
+  	font-weight: bold;
+  	margin-bottom: 5px;
+  	padding: 0px;
+}
+
+.share {
+	position: absolute;
+  	right: 10px;
+  	z-index: 99;
+  	bottom: 0px;
+}
