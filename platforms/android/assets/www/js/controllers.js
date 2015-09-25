@@ -51,10 +51,10 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', 'C
 	$scope.displayTips = function () {
 		var categoryId = $routeParams.cat;
 		
-		console.log("Tip Category : " + categoryId);
+		//console.log("Tip Category : " + categoryId);
 		var ctgry = Category.collectCategory(categoryId);
 		if(ctgry) {
-			console.log("Category : " + JSON.stringify(ctgry));
+			//console.log("Category : " + JSON.stringify(ctgry));
 		}
 
 		var tips = Article.fetchArticlesByCategory(categoryId);
@@ -140,6 +140,12 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 		$scope.index = ($scope.index > 0) ? --$scope.index : 0;
 		$scope.displayTipDetail();
 	};
+
+	$scope.share = function ($event, tip) {         
+		//console.log('Gesture ' + $event.type + ' - tip ' + JSON.stringify(tip));
+		window.plugins.socialsharing.share('\n Download Telugu Tips App https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips', tip.title + ' Read More - ' + tip.link)
+	};
+
 	
 	//Loading the Tips
 	$scope.displaySelectedTip();

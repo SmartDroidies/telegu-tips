@@ -31,6 +31,7 @@ h3 {
 /* Main Div Styling */
 .content, .menu, .setting {
   padding: 50px 0 0 0;
+  margin: 0px;
 }
 
 .content {
@@ -70,7 +71,7 @@ snap-drawer  {
 }
 
 .list-group-item {
-  padding : 5px;
+  padding : 3px;
 }
 
 .list-group-item-heading {
@@ -135,7 +136,7 @@ snap-drawer  {
 }
 
 .share {
-	display : none;
+	/* display : none; */
 } 
 
 .tip-listitem-content {
@@ -163,11 +164,13 @@ a.nav_link:hover, a.nav_link:visited, a.nav_link:active {
 */
 
 .menu-control {
-	position : absolute;
-	left : 5px;
-	top : 5px;
-	height: 36px;
-  	width: 38px;
+    position: absolute; 
+    left: 5px;
+    top: 8px;
+    height: 36px;
+    width: 38px;
+    margin: 0px;
+    padding: 0px;	
 }
 
 .setting-control {
@@ -323,13 +326,15 @@ div.position {
 
 
 body > .content {
-  overflow: scroll;
-  height: 100%;
+	overflow: scroll;
+	height: 100%;
 }
 
 .nav-telugu {
-  background-color: #F2D0D0;
-  border-color: #F2D0D0;
+	background-color: #F2D0D0;
+	border-color: #F2D0D0;
+	margin: 0px;
+	padding: 0px;  
 }
 
 .img-title {
@@ -343,6 +348,8 @@ a.list-group-item .list-group-item-heading {
 
 .list {
 	background-color: #F2D0D0;
+	padding: 0px;
+    margin: 0px;
 }
 
 a:hover, a:focus {
@@ -368,7 +375,20 @@ a:hover, a:focus {
 
 .share {
 	position: absolute;
-  	right: 10px;
-  	z-index: 99;
-  	bottom: 0px;
+    right: 5px;
+    top: 5px;
+    height: 36px;
+    width: 38px;
+    margin: 0px;
+    padding: 0px;	
+}
+
+.main {
+	padding : 0px;
+	margin: 0px;
+}
+
+.main-header {
+	padding : 0px;
+	margin: 0px;	
 }
