@@ -38,7 +38,29 @@ telegutipsServices.factory ('StorageService', function () {
 		var sortedFiltered = _.sortBy(filtered, "post_date").reverse();
 		return sortedFiltered;
 	}
-	
+
+	//Update Read
+	storageFactory.updateRead = function(id) {
+		//console.log("Tip Id : " + id);
+		var data =  window.localStorage.getItem("tips");
+		var tipsJSON = JSON.parse(data);
+
+		var tip = _.find(tipsJSON,function(rw, rwIdx) { 
+			if(rw.id == id) { 
+				//console.log ("Updating Read Status for  : " + id); 
+				rw.new = false;
+				tipsJSON[rwIdx] = rw;
+				return true;
+			}; 
+		});
+
+		//Tip is not empty
+		if(tip != null) {
+			window.localStorage.setItem("tips", JSON.stringify(tipsJSON));
+		}
+
+	}	
+
 	return storageFactory;
 }); 
 
@@ -49,11 +71,8 @@ cacheServices.factory('cacheService', ['$cacheFactory', function ($cacheFactory)
 		}
 	]);
 
-
-
-
 //Factory for managing articles
-telegutipsServices.factory ('ArticleService', function (StorageService, _, cacheService) {
+telegutipsServices.factory ('ArticleService', function (StorageService, _, cacheService, FavouriteService) {
 	var factory = {}; 
 	
 	//Fetch All Articles 
@@ -144,9 +163,65 @@ telegutipsServices.factory ('ArticleService', function (StorageService, _, cache
 		}
 		return stats;
     }
+
+    //Collect Favourite Articles 
+	factory.collectFavourites = function() {
+		var self = this;
+		var articles = self.fetchArticles();
+		//console.log("Total Articles : " + articles.length);
+		var favourites = FavouriteService.collectFavourite();
+		//console.log("Favourite Articles : " + favourites);
+
+		articles = _.filter(articles, function(item) { 
+			var bFavourite = false;
+			
+			if(favourites != null) {
+				var index = favourites.indexOf(item.id.toString());
+				//console.log("Comparision : " + item.id + " : " + index);
+				if (index > -1) {
+	    			bFavourite = true;
+	    			//console.log("Favourite Found : " + item.id);
+				}			
+			}
+			return bFavourite; 
+		});
+
+		return articles;
+
+	}
+
+    //Collect New Tips 
+	factory.collectNewTips = function() {
+		var self = this;
+		var articles = self.fetchArticles();
+
+		articles = _.filter(articles, function(item) { 
+			//console.log("New Tips Search : " + item.id + " - " + item.new);
+			return item.new; 
+		});
+		//console.log("New Tip Count : " + _.size(articles));
+		return articles;
+	}
+
+	//Fetch Articles By Tip ID
+	factory.collectArticleByTipId = function(id) {
+		var selectedTip = null;
+		var tipsAll = StorageService.collectTips();
+		if(tipsAll) {
+			selectedTip = _.find(tipsAll, function(item) {  
+				//console.log("Comparision : " + item.id + " : " + id);
+				return (item.id == id); 
+			});
+		}
+		console.log("Selected Tip : " + selectedTip);
+		if(selectedTip != null)  { 
+			selectedTip.favourite = FavouriteService.isFavourite(id);
+		}
+		return selectedTip;
+	}
+
     return factory;
 }); 
-
 
 //Factory for managing category
 telegutipsServices.factory ('CategoryService', function (_, cacheService, $http, $q) {
@@ -198,4 +273,82 @@ telegutipsServices.factory ('CategoryService', function (_, cacheService, $http,
 	} 
 
     return factory;
+}); 
+
+//Factory for managing favourite
+telegutipsServices.factory ('FavouriteService', function () {
+	var favouriteFactory = {}; 
+	
+	//Add Tip to favourite 
+	favouriteFactory.addTip = function(tipID) {
+		//console.log('Adding Tip to favourite list : ' + tipID);
+		var favourite = null;
+		var favouriteStored = window.localStorage.getItem("favourite"); 
+		if(favouriteStored == null) {
+			favourite = new Array();
+			favourite.push(tipID);
+		} else {
+			//console.log("Favourite Stored : " + favouriteStored);	
+			favourite = new Array(favouriteStored);
+			favourite.push(tipID);
+		}
+		//console.log("Favourite : " + favourite);	
+		if(favourite != null) {
+			window.localStorage.setItem("favourite", favourite);	
+		}
+	}
+
+	//Remove Tip from favourite 
+	favouriteFactory.removeTip = function(tipID) {
+		console.log('Remove Tip from favourite list : ' + tipID);
+		var favourite = null;
+		var favouriteStored = window.localStorage.getItem("favourite"); 
+		if(favouriteStored != null) {
+			console.log("Favourite Stored : " + favouriteStored);	
+			favourite = favouriteStored.split(",");
+			var index = favourite.indexOf(tipID.toString());
+			if (index > -1) {
+    			favourite.splice(index, 1);
+			}			
+		}
+		console.log("Favourite : " + favourite);	
+		if(favourite != null) {
+			window.localStorage.setItem("favourite", favourite);	
+		}
+	}
+
+	//Check for favourite 
+	favouriteFactory.isFavourite = function(tipID) {
+		//console.log('Check Favourite for : ' + tipID);
+		var flgFavourite = false;
+		var favouriteStored = window.localStorage.getItem("favourite"); 
+		if(favouriteStored != null) {
+			//console.log("Favourite Stored : " + favouriteStored);	
+			var favourites = favouriteStored.split(",");
+			var stored = _.find(favourites, function(id) { 
+				//console.log("Cmparisison : " + id + " - " +  tipID);
+				return id == tipID; 
+			});
+			//console.log("Stored  ID : " + stored);
+			if(stored) {
+				flgFavourite = true;		
+			}
+		}
+		//console.log("Favourite : " + flgFavourite);
+		return flgFavourite;
+	}
+
+	//Collect favourites 
+	favouriteFactory.collectFavourite = function(tipID) {
+		//console.log('Adding Tip to favourite list : ' + tipID);
+		var favourite = null;
+		var favouriteStored = window.localStorage.getItem("favourite"); 
+		if(favouriteStored != null) {
+			favourite = favouriteStored.split(",");
+		}
+		return favourite;
+	}
+	
+	
+	return favouriteFactory;
 }); 

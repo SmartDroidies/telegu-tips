@@ -1,22 +1,77 @@
 
-<div class="main">
+<div class="main col-xs-12">
 
     <!-- Header -->
-    <nav class="navbar navbar-fixed-top nav-telugu" role="navigation">
-      <div class="navbar-header main-header">
+    <nav class="navbar navbar-fixed-top nav-telugu col-xs-12" role="navigation">
+      <div class="navbar-header main-header col-xs-12">
         <img id="menu-cntrl" class="menu-control" src="images/menu.png"/>
-        <div class="head_section">
-          <h2  id="main-title" class="main-title">{{ 'TITLE' | translate }}</h2>
+        <div class="head_section col-xs-12">
+          <h2  id="main-title" class="main-title col-xs-12">{{ 'TITLE' | translate }}</h2>
         </div>
         <img id="setting-cntrl" class="setting-control" src="images/setting.png"/>
       </div>
     </nav>
 
-	<div id="main" class="nav-section ui-page-active" data-role="page">
-		<div ng-repeat="ctgry in categories" class="alert ctgry" role="alert">
-		  <img class="ctgryIcon" src="{{ctgry.imageUrl}}"/>
-		  <a href="#/tips/{{ctgry.id}}" class="cat_link alert-link">{{ ctgry.code | translate }}</a>
-		</div>
+    <!-- Tab Navigation -->
+	<ul id="main-tabs" class="nav nav-tabs col-xs-12 main-tabs">
+		<li class="col-xs-4" ng-class="{'active': tab == 1}" ng-click="unreadView()">
+			<a class="main-tab-link">{{ 'UNREAD_TAB' | translate }}</a>
+		</li>
+		<li class="col-xs-4" ng-class="{'active': tab == 2}" ng-click="ctgryView()">
+			<a class="main-tab-link">{{ 'CATEGORY_TAB' | translate }}</a>
+		</li>
+		<li class="col-xs-4" ng-class="{'active': tab == 3}" ng-click="favouriteView()">
+			<a class="main-tab-link">{{ 'FAVOURITE_TAB' | translate }}</a>
+		</li>
+	</ul>
+
+
+	<div id="main" class="nav-section ui-page-active col-xs-12" data-role="page">
+
+	    <!-- Group View for Unread Articles --> 
+	    <div id="group-unread" ng-if="tab == 1" class="col-xs-12 group">
+	      <div ng-if="newtips.length == 0" class="col-xs-12">
+	        No New Tips Found
+	      </div>  
+	      <div class="list-group tip-list col-xs-12" ng-repeat="tip in newtips">
+	        <a href="#/tip/{{tip.id}}" class="list-group-item col-xs-12">
+	          <div class="tip-listitem-content">
+	            <h4 class="list-group-item-heading"><span ng-bind-html="tip.title"></span></h4>
+	            <!--span class="feed-date">{{feed.publishedDate |  toLongDate}}</span--> 
+	          </div>  
+	          <div class="tip-listitem-icon"> 
+	            <p ng-bind-html="tip.content | feedicon" class="list-group-item-text" ></p>
+	          </div>  
+	        </a>
+	      </div>
+	    </div>  
+
+	    <!-- Group View for Category --> 
+	    <div id="group-category" ng-if="tab == 2" class="col-xs-12 group">
+			<div ng-repeat="ctgry in categories" class="alert ctgry col-xs-12" role="alert">
+			  <img class="ctgryIcon" src="{{ctgry.imageUrl}}"/>
+			  <a href="#/tips/{{ctgry.id}}" class="cat_link alert-link">{{ ctgry.code | translate }}</a>
+			</div>
+	    </div>  
+
+	    <!-- Group View for Favourite Articles --> 
+	    <div id="group-favourite" ng-if="tab == 3" class="col-xs-12 group">
+	      <div ng-if="favourite.length == 0" class="col-xs-12">
+	        No Favourite found
+	      </div>  
+	      <div class="list-group tip-list col-xs-12" ng-repeat="tip in favourite">
+	        <a href="#/tip/{{tip.id}}" class="list-group-item col-xs-12">
+	          <div class="tip-listitem-content">
+	            <h4 class="list-group-item-heading"><span ng-bind-html="tip.title"></span></h4>
+	            <!--span class="feed-date">{{feed.publishedDate |  toLongDate}}</span--> 
+	          </div>  
+	          <div class="tip-listitem-icon"> 
+	            <p ng-bind-html="tip.content | feedicon" class="list-group-item-text" ></p>
+	          </div>  
+	        </a>
+	      </div>  
+	    </div>  
+
 	</div>
 
 </div>

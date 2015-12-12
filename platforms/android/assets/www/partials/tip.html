@@ -7,11 +7,13 @@
 	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position">{{ category.code | translate }} {{tip.position}} of {{tip.size}}</h2> 
 	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position == 'undefined'">{{ category.code | translate }} </h2> 
         </div>
+      	<img id="img-favourite" class="favourite" src="images/favorite.png" ng-if="tip.favourite" ng-click="unfavourite($event, tip)"/>
+      	<img id="img-unfavourite" class="favourite" src="images/unfavorite.png" ng-if="!tip.favourite"  ng-click="favourite($event, tip)" />
         <img id="img-share" alt="Share" class="share" src="images/share.png" ng-click="share($event, tip)"/>
       </div>
     </nav>
 
-	<div class="tip" ng-swipe-left="older({{index}})" ng-swipe-right="newer({{index}})">
+	<div class="tip col-xs-12" ng-swipe-left="older({{index}})" ng-swipe-right="newer({{index}})">
 		<input type="hidden" id="sequence" ng-model="tip.position"/></input>
 		<input type="hidden" ng-model="tip.size"/></input>
 		<h4 id="tip-title" class="tip-head"><span ng-bind-html="tip.title"></span></h4>

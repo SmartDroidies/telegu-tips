@@ -4,10 +4,48 @@
 
 var telegutipsControllers = angular.module('telegutipsControllers', []);
 
-telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'CategoryService',
-  function($scope, Article, categoryService) {
+telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'CategoryService', '$rootScope',
+  function($scope, Article, categoryService, $rootScope) {
+
+
 	//Show Home Page
-	$scope.collectStatistics = function () {    
+	$scope.displayView = function () {    
+
+		$scope.screen = "HOME";
+		$scope.title = "TITLE";
+
+		if($rootScope.tab == 2) { 
+			$scope.displayCategories();
+		} else if ($rootScope.tab == 3) {
+			$scope.favourite = Article.collectFavourites();	
+		} else if ($rootScope.tab == 1) {
+			$scope.newtips = Article.collectNewTips();
+		} 	
+	}; 
+
+
+	//Display Unread Articles View
+	$scope.unreadView = function() {
+		$scope.newtips = Article.collectNewTips();
+		$rootScope.tab = 1;
+    };
+
+	//Display Articles Category
+	$scope.ctgryView = function() {
+		$scope.displayCategories();
+		$rootScope.tab = 2;
+    };
+
+	//Display Favourite Articles
+	$scope.favouriteView = function() {
+		$scope.favourite = Article.collectFavourites();
+		console.log("Favourites : " + $scope.favourite.length);
+		$rootScope.tab = 3;
+
+    };
+
+	//Show Home Page
+	$scope.displayCategories = function () {    
 
 		var promise =  categoryService.collectCategories();
 		promise.then (
@@ -37,11 +75,17 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 	};	
 
 	$scope.refresh = function () {
-		$scope.collectStatistics();	
+		$scope.displayCategories();	
 	}  
 
+	//Set Default Tab to Category Listing
+	if(!$rootScope.tab) {
+		$rootScope.tab = 2;
+	} 
+
 	//Show Home
-	$scope.collectStatistics();
+	$scope.displayView();
+
   }]
 );
 
@@ -74,33 +118,54 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', 'C
 	$scope.displayTips();
 }]);
 
-telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService',  '$http', '$location', '$interval',
-  function($scope, $routeParams, Storage, $http, $location, $interval) {
+telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageService', 'ArticleService', 'FavouriteService', '$http', '$location', '$interval',
+  function($scope, $routeParams, Storage, Article, Favourite, $http, $location, $interval) {
 	$scope.loadTip = function () {       
-		window.plugins.spinnerDialog.show();
-		$("#footer").hide();
-		$http.get('http://telugu.tips2stayhealthy.com/?json=y&id=' + $routeParams.id).
-    	    success(function(data) {
-    	    	//console.log("JSON Data : " + JSON.stringify(data));	
-    	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
-            		$scope.tip = data.tips[0];
-            		window.plugins.spinnerDialog.hide();
-            		$interval(showInterstitial, 5000);
-            	} else {
-            		//console.log("JSON Data : " + JSON.stringify(data));
-            		window.plugins.spinnerDialog.hide();
-            		$location.path('/home');  
-            	}
-    		})		
+		var tipID =  $routeParams.id;
+		//console.log("Load Tip : " + tipID);
+
+		var tip = Article.collectArticleByTipId(tipID);
+		//console.log("Tip Detail : " + tip);
+		if(tip == null) {
+			window.plugins.spinnerDialog.show();
+			$http.get('http://telugu.tips2stayhealthy.com/?json=y&id=' + $routeParams.id).
+	    	    success(function(data) {
+	    	    	//console.log("JSON Data : " + JSON.stringify(data));	
+	    	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
+	            		$scope.tip = data.tips[0];
+	            		window.plugins.spinnerDialog.hide();
+	            		$interval(showInterstitial, 5000);
+	            	} else {
+	            		//console.log("JSON Data : " + JSON.stringify(data));
+	            		window.plugins.spinnerDialog.hide();
+	            		$location.path('/home');  
+	            	}
+	    		})		
+	    } else {
+			$scope.tip = tip;
+			Storage.updateRead(tip.id);
+		}	
 	}	
-	
+
+	//Add tip to favourite
+	$scope.favourite = function ($event, tip) {
+		Favourite.addTip(tip.id);
+		$scope.tip.favourite = true;
+	};
+
+	//Remove tip from favourite
+	$scope.unfavourite = function ($event, tip) {         
+		Favourite.removeTip(tip.id);
+		$scope.tip.favourite = false;
+	};
+
 	//Collecting the details of the tip
 	$scope.loadTip();
 }]);
 
 //Controller to display Tip Details
-telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', 'ArticleService', 'CategoryService','$sce',
-	function($scope, $routeParams, Article, Category, $sce) {
+telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', 'ArticleService', 'CategoryService', 'FavouriteService', '$sce',
+	function($scope, $routeParams, Article, Category, Favourite, $sce) {
 
 	$scope.displaySelectedTip = function() {
 		var categoryId = $routeParams.cat;
@@ -128,6 +193,10 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 		hidePopup();
 	}
 
+	$scope.share = function ($event, tip) {         
+		//console.log('Gesture ' + $event.type + ' - tip ' + JSON.stringify(tip));
+		window.plugins.socialsharing.share('\n Download Telugu Tips App https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips', tip.title + ' Read More - ' + tip.link)
+	};
 
 	//Older Article  
 	$scope.older = function () {
@@ -146,7 +215,18 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 		window.plugins.socialsharing.share('\n Download Telugu Tips App https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips', tip.title + ' Read More - ' + tip.link)
 	};
 
-	
+	//Add tip to favourite
+	$scope.favourite = function ($event, tip) {
+		Favourite.addTip(tip.id);
+		$scope.tip.favourite = true;
+	};
+
+	//Remove tip from favourite
+	$scope.unfavourite = function ($event, tip) {         
+		Favourite.removeTip(tip.id);
+		$scope.tip.favourite = false;
+	};
+
 	//Loading the Tips
 	$scope.displaySelectedTip();
 

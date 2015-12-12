@@ -1,3 +1,5 @@
+var testDevice = '9ff99ad5ec042ed6';
+
 //Device Ready Event
 document.addEventListener("deviceready", onDeviceReadyAction, false);
 function onDeviceReadyAction() {
@@ -197,6 +199,17 @@ function exitAppPopup() {
     return false;
 }
 
+//Check if the devise is test device
+function isTestDevice() {
+    var flgTestDevice = false;
+    var deviceUUID = device.uuid;
+    if(deviceUUID == testDevice) {
+      //console.log("Test Device : " + device.uuid);
+      flgTestDevice = true;
+    }
+    return flgTestDevice;
+}
+
 
 function initializeAd() {
 
@@ -205,19 +218,30 @@ function initializeAd() {
     document.addEventListener(admob.Event.onInterstitialFailedReceive,onReceiveFail, false);
     document.addEventListener(admob.Event.onBannerFailedReceive,onReceiveFail, false);
 
-    admob.showBanner(admob.BannerSize.BANNER, admob.Position.BOTTOM_CENTER, null);
+    var admobParam = null;
+    if(isTestDevice()) {
+      admobParam = new  admob.Params();
+      admobParam.isTesting = true;
+    }
+
+
+    admob.showBanner(admob.BannerSize.SMART_BANNER, admob.Position.BOTTOM_CENTER, admobParam);
 
     admob.cacheInterstitial();
 
 }
 
 //Load AdMob Interstitial Ad
-function showInterstitial(){
-    admob.isInterstitialReady(function(isReady){
-        if(isReady){
-            admob.showInterstitial();
-        }
-    });
+function showInterstitial() {
+
+	if(!isTestDevice()) {
+	    admob.isInterstitialReady(function(isReady){
+	        if(isReady){
+	            admob.showInterstitial();
+	        }
+	    });
+	}    
+
 }
 
 function onInterstitialReceive (message) {
