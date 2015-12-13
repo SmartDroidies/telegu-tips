@@ -23,6 +23,26 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 		} 	
 	}; 
 
+	//Show or Hide Menu
+	$scope.showMenu = function () {       
+		if($("#menu").is(":visible")) {
+			hidePopup();
+		} else {
+			$("#menu").show(300);
+			$("#setting").hide();
+		}
+	};	
+
+	//Show or Hide Setting
+	$scope.showSetting = function () {       
+		if($("#setting").is(":visible")) {
+			hidePopup();
+		} else {
+			$("#setting").show(300);
+			$("#menu").hide();
+		}
+	};	
+
 
 	//Display Unread Articles View
 	$scope.unreadView = function() {

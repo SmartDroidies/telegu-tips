@@ -5,16 +5,19 @@ document.addEventListener("deviceready", onDeviceReadyAction, false);
 function onDeviceReadyAction() {
 	//console.log(cordova.file);
 	//console.log(FileTransfer);
+	/*
 	var lastSyncTime = window.localStorage.getItem("sync_time");
 	if (lastSyncTime) {
 		downloadLatestTips();
 	} else {
 		loadInitialTips();	
 	}
+	*/
 
 	// Manage Ad
 	initializeAd();
 	
+	/*
 	//Handle Menu 
 	$( "#menu-cntrl" ).click(function() {
 		if($("#menu").is(":visible")) {
@@ -36,6 +39,7 @@ function onDeviceReadyAction() {
 			$("#menu").hide(200);
 		}
 	});
+	*/
 
 
 }
