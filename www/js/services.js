@@ -10,17 +10,24 @@ telegutipsServices.factory('Tips', ['$resource',
 
 //Factory for loading the feed from Local Storage
 telegutipsServices.factory ('StorageService', function () {
+
 	var storageFactory = {}; 
+	var keyTips =  "tips";
+	var keySyncTime =  "sync_time";
+	var keySyncVersion =  "sync_version";
+	var synced;
+
+
 	//Collect all tips 
 	storageFactory.collectTips = function() {
 		//console.log('Collecting Tips from Local Storage');
-		var data =  window.localStorage.getItem("tips");
+		var data =  window.localStorage.getItem(keyTips);
 		return JSON.parse(data);
 	}
 	
 	//Collect tips by category
 	storageFactory.collectTipsByCat = function(ctgry) {
-		var data =  window.localStorage.getItem("tips");
+		var data =  window.localStorage.getItem(keyTips);
 		var allTipsJSON = JSON.parse(data);
 		var filtered = [];
 		for (var i = 0, len = allTipsJSON.length; i < len; i++) {
@@ -42,7 +49,7 @@ telegutipsServices.factory ('StorageService', function () {
 	//Update Read
 	storageFactory.updateRead = function(id) {
 		//console.log("Tip Id : " + id);
-		var data =  window.localStorage.getItem("tips");
+		var data =  window.localStorage.getItem(keyTips);
 		var tipsJSON = JSON.parse(data);
 
 		var tip = _.find(tipsJSON,function(rw, rwIdx) { 
@@ -56,10 +63,114 @@ telegutipsServices.factory ('StorageService', function () {
 
 		//Tip is not empty
 		if(tip != null) {
-			window.localStorage.setItem("tips", JSON.stringify(tipsJSON));
+			window.localStorage.setItem(keyTips, JSON.stringify(tipsJSON));
 		}
 
 	}	
+
+	//Collect all tips 
+	storageFactory.syncDate = function() {
+		var self = this;
+		var fileURLVersion =  "files/version.json";	
+		var version = window.localStorage.getItem(keySyncVersion);
+
+		jQuery.getJSON(fileURLVersion, function (data) {
+			//console.log("Loading Quotes from FileSystem");
+		}).done(function(data) {
+			//console.log("Version : " + JSON.stringify(data.quotes));
+			var quotesVersion =  data.quotes;
+			if(!version || quotesVersion > version) {
+				self.loadInitialData(quotesVersion);
+			} else {
+				self.syncLatestData();	
+			}
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("Show Error Message - " + textStatus);
+		}).always(function() {
+			
+		});
+	}
+
+	//Load Initial Data
+	storageFactory.loadInitialData = function(version) {
+		var self = this;
+		var fileURL =  "files/initial-tips.json";
+		jQuery.getJSON(fileURL, function (data) {
+			//console.log("Loading Quotes from FileSystem");
+		}).done(function(data) {
+			//console.log("Updating Local Storage : " + data.version);
+			window.localStorage.setItem(keySyncTime, data.time);
+			window.localStorage.setItem(keyTips, JSON.stringify(data.tips));
+			window.localStorage.setItem(keySyncVersion, version);
+			//Sync Local Storage after loaading initial data
+			self.syncLatestData();
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("Show Error Message - " + textStatus);
+		}).always(function() {
+			
+		});
+	}	
+
+	//Sync Latest Data from server
+	storageFactory.syncLatestData = function() {
+		//Syncing Remote Data
+		var self = this;
+		var uri = encodeURI("http://telugu.tips2stayhealthy.com/?json=y");
+		var lastSyncTime = window.localStorage.getItem(keySyncTime);
+		if(lastSyncTime) {
+			lastSyncTime = lastSyncTime - 18000;
+			uri = encodeURI("http://telugu.tips2stayhealthy.com/?json=y&ts=" + lastSyncTime);
+		} 
+		//console.log("Download URL : " + uri);
+		jQuery.getJSON(uri, function (data) {
+			//console.log("Loading Latest Articles from Server");
+		}).done(function(data) {
+			//console.log("Fresh Data - " + JSON.stringify(data));
+			self.syncLocalStorage(data);
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log("Show Error Message - " + textStatus);
+		}).always(function() {
+			
+		});
+	}
+
+	//Sync Temp JSON
+	storageFactory.syncLocalStorage = function(remoteJSON) {	
+		var localTips =  window.localStorage.getItem(keyTips);
+		var localJSON = JSON.parse(localTips);
+		var initialTipSize = _.size(localJSON);
+		//console.log("Modified Array Size : " + _.size(remoteJSON.tips));		
+		//console.log("Local Array Initial Size : " + initialTipSize);		
+		if(_.size(remoteJSON) >  0) {
+			$.each(remoteJSON.tips, function(key, item) {
+				var newTip = true;
+				_.find(localJSON,function(rw, rwIdx) { 
+					if(rw.id == item.id) { 
+						//console.log ("Replace Existing Object for : " + item.id); 
+						localJSON[rwIdx] = item;
+						newTip = false; 
+						return true;
+					}; 
+				});
+				//If new tip
+				if(newTip) {
+					//console.log("New Object for : " + key + " - " + JSON.stringify(item));
+					item.new = true;
+					localJSON.push(item);
+				} 
+			});
+			var finalTipSize = _.size(localJSON);
+			//console.log("Local Array Final Size : " + finalTipSize);		
+			//Update Local storage only if new array is bigger or equal to current array size
+			if(finalTipSize >= initialTipSize) {
+				window.localStorage.setItem(keyTips, JSON.stringify(localJSON));
+				var modifiedTime = remoteJSON.time;
+				if(typeof modifiedTime != 'undefined') {
+					window.localStorage.setItem(keySyncTime, remoteJSON.time);
+				}
+			}	
+		}
+	}
 
 	return storageFactory;
 }); 
@@ -85,6 +196,12 @@ telegutipsServices.factory ('ArticleService', function (StorageService, _, cache
 				cacheService.put(key, tips);
 			}
 		}
+		return tips;
+	}
+
+	//Fetch All Articles 
+	factory.fetchStoredArticles = function() {
+		var tips = StorageService.collectTips();
 		return tips;
 	}
 
@@ -193,7 +310,7 @@ telegutipsServices.factory ('ArticleService', function (StorageService, _, cache
     //Collect New Tips 
 	factory.collectNewTips = function() {
 		var self = this;
-		var articles = self.fetchArticles();
+		var articles = self.fetchStoredArticles();
 
 		articles = _.filter(articles, function(item) { 
 			//console.log("New Tips Search : " + item.id + " - " + item.new);
@@ -213,7 +330,7 @@ telegutipsServices.factory ('ArticleService', function (StorageService, _, cache
 				return (item.id == id); 
 			});
 		}
-		console.log("Selected Tip : " + selectedTip);
+		//console.log("Selected Tip : " + selectedTip);
 		if(selectedTip != null)  { 
 			selectedTip.favourite = FavouriteService.isFavourite(id);
 		}

@@ -4,8 +4,8 @@
 
 var telegutipsControllers = angular.module('telegutipsControllers', []);
 
-telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'CategoryService', '$rootScope',
-  function($scope, Article, categoryService, $rootScope) {
+telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'CategoryService', 'StorageService', '$rootScope',
+  function($scope, Article, categoryService, StorageService, $rootScope) {
 
 
 	//Show Home Page
@@ -47,6 +47,7 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 	//Display Unread Articles View
 	$scope.unreadView = function() {
 		$scope.newtips = Article.collectNewTips();
+		//console.log('Unread Array Size : ' + _.size($scope.newtips));
 		$rootScope.tab = 1;
     };
 
@@ -59,7 +60,7 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 	//Display Favourite Articles
 	$scope.favouriteView = function() {
 		$scope.favourite = Article.collectFavourites();
-		console.log("Favourites : " + $scope.favourite.length);
+		//console.log("Favourites : " + $scope.favourite.length);
 		$rootScope.tab = 3;
 
     };
@@ -102,6 +103,14 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 	if(!$rootScope.tab) {
 		$rootScope.tab = 2;
 	} 
+
+	//Sync Local Data
+	if(!$rootScope.synced) {
+		//console.log("Requesting for Sync");
+		StorageService.syncDate();
+		$rootScope.synced = true;
+	}
+
 
 	//Show Home
 	$scope.displayView();

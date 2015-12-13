@@ -16,31 +16,6 @@ function onDeviceReadyAction() {
 
 	// Manage Ad
 	initializeAd();
-	
-	/*
-	//Handle Menu 
-	$( "#menu-cntrl" ).click(function() {
-		if($("#menu").is(":visible")) {
-			hidePopup();
-			//$("#menu").hide(200);
-		} else {
-			$("#menu").show(300);
-			$("#setting").hide(200);
-		}
-	});
-
-	//Handle Menu 
-	$( "#setting-cntrl" ).click(function() {
-		if($("#setting").is(":visible")) {
-			hidePopup();	
-			//$("#setting").hide(200);
-		} else {
-			$("#setting").show(300);
-			$("#menu").hide(200);
-		}
-	});
-	*/
-
 
 }
 
@@ -106,6 +81,7 @@ function loadInitialTips() {
 	});
 }
 
+/*
 // Function to download latest Tips JSON
 function downloadLatestTips() {
 	var message = "Synchronizing Latest Tips...";
@@ -145,7 +121,6 @@ function syncLocalStorage(file) {
 				var newTip = false;
 				_.find(localJSON,function(rw, rwIdx) { 
 					if(rw.id == item.id) { 
-						/* console.log("Replace Existing Object for : " + rw.id); */
 						newTip = true; return true;
 					}; 
 				});
@@ -178,7 +153,7 @@ function syncLocalStorage(file) {
 		//ActivityIndicator.hide();
 	});
 }
-
+*/
 
 //Exit Implementation
 document.addEventListener("backbutton", function() {
