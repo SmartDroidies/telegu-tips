@@ -58,9 +58,9 @@ telugutipsApp.config(function ($translateProvider) {
 		  HOME_TIPS: '\u0c07\u0c02\u0c1f\u0c3f \u0c2e\u0c46\u0c30\u0c41\u0c17\u0c41\u0c26\u0c32\u0c15\u0c41 \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
 		  HOME_REMEDIES: '\u0c07\u0c02\u0c1f\u0c4d\u0c32\u0c4b \u0c09\u0c02\u0c21\u0c47 \u0c14\u0c37\u0c26\u0c3e\u0c32\u0c41',
 		  EXERCISE_TIPS: '\u0c2f\u0c4b\u0c17\u0c3e \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
-		  UNREAD_TAB: 'Unread',
-		  CATEGORY_TAB: 'Category',
-		  FAVOURITE_TAB: 'Favourite',
+		  UNREAD_TAB: '\u0c1a\u0c26\u0c35\u0c28\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
+		  CATEGORY_TAB: '\u0c35\u0c3f\u0c2d\u0c3e\u0c17\u0c3e\u0c32\u0c41',
+		  FAVOURITE_TAB: '\u0c07\u0c37\u0c4d\u0c1f\u0c2e\u0c48\u0c28 \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
           BUTTON_LANG_EN: 'englisch',
           BUTTON_LANG_DE: 'deutsch'
         });

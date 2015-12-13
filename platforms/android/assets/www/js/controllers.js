@@ -60,7 +60,7 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
 	//Display Favourite Articles
 	$scope.favouriteView = function() {
 		$scope.favourite = Article.collectFavourites();
-		console.log("Favourites : " + $scope.favourite.length);
+		//console.log("Favourites : " + $scope.favourite.length);
 		$rootScope.tab = 3;
 
     };
