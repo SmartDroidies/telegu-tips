@@ -2,14 +2,15 @@
 	 <!-- Header -->
     <nav class="navbar nav-telugu navbar-fixed-top col-xs-12" role="navigation">
       <div class="navbar-header main-header col-xs-12">
-        <img id="menu-cntrl" class="menu-control" src="images/back.png" onclick="history.back();"/>
+        <img id="menu-cntrl" class="menu-control" ng-src="images/back.png" onclick="history.back();"/>
         <div class="head_section col-xs-12">
 	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position">{{ category.code | translate }} {{tip.position}} of {{tip.size}}</h2> 
 	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position == 'undefined'">{{ category.code | translate }} </h2> 
         </div>
-      	<img id="img-favourite" class="favourite" src="images/favorite.png" ng-if="tip.favourite" ng-click="unfavourite($event, tip)"/>
-      	<img id="img-unfavourite" class="favourite" src="images/unfavorite.png" ng-if="!tip.favourite"  ng-click="favourite($event, tip)" />
-        <img id="img-share" alt="Share" class="share" src="images/share.png" ng-click="share($event, tip)"/>
+      	<img id="img-favourite" class="favourite" ng-src="images/favorite.png" ng-if="tip.favourite" ng-click="unfavourite($event, tip)"/>
+      	<img id="img-unfavourite" class="favourite" ng-src="images/unfavorite.png" ng-if="!tip.favourite"  ng-click="favourite($event, tip)" />
+        <!--img id="img-share" alt="Share" class="share" src="images/share.png" ng-click="share($event, tip)"/-->
+        <img id="img-share" alt="Share" class="share" ng-src="images/share.png" ng-click="showShareMenu()"/>
       </div>
     </nav>
 
@@ -20,3 +21,15 @@
 		<div class="tip-content" format-content ng-bind-html="tip.content"></div>
 	</div>	
 </div>	
+
+<div id="share_menu" class="share_menu">
+  <div>
+    <img ng-click="shareViaFacebook()" ng-src="images/facebook.png" class="share-icon" />
+  </div>
+  <div>
+    <img ng-click="shareViaTwitter()" ng-src="images/twitter.png" class="share-icon" />
+  </div>  
+  <div>
+    <img ng-click="shareViaWhatsapp()" ng-src="images/whatsApp.png" class="share-icon" />
+  </div>  
+</div>

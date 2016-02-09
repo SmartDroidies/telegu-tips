@@ -49,7 +49,7 @@
 	    <!-- Group View for Category --> 
 	    <div id="group-category" ng-if="tab == 2" class="col-xs-12 group">
 			<div ng-repeat="ctgry in categories" class="alert ctgry col-xs-12" role="alert">
-			  <img class="ctgryIcon" src="{{ctgry.imageUrl}}"/>
+			  <img class="ctgryIcon" ng-src="{{ctgry.imageUrl}}"/>
 			  <a href="#/tips/{{ctgry.id}}" class="cat_link alert-link">{{ ctgry.code | translate }}</a>
 			</div>
 	    </div>  

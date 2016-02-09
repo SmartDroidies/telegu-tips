@@ -454,3 +454,16 @@ ul.main-tabs {
 .paddless {
 	padding : 0px;
 }
+
+.share_menu {
+   position: absolute;
+   top: 45px;
+   right: 0px;
+   display: none;
+}    
+
+.share-icon {
+	margin: 5px;
+	width: 40px;
+	height: 40px;
+}    

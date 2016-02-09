@@ -161,6 +161,9 @@
         },
         "com.admob.plugin": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "com.darktalker.cordova.screenshot": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         }
     },
     "dependent_plugins": {

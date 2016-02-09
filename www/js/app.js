@@ -22,7 +22,7 @@ telugutipsApp.config(['$routeProvider',
 			}).
 			when('/tip/:id', {
 				templateUrl : 'partials/tip.html',
-				controller : 'TipCtrl'
+				controller : 'CategoryTipCtrl'
 			}).
 			when('/tip/:cat/:index', {
 				templateUrl : 'partials/tip.html',
