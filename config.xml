@@ -19,7 +19,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
 
-        <icon src="res/android/telugutips_ldpi.png" density="ldpi" />
+        <!--icon src="res/android/telugutips_ldpi.png" density="ldpi" /-->
         <icon src="res/android/telugutips_mdpi.png" density="mdpi" />
         <icon src="res/android/telugutips_hdpi.png" density="hdpi" />
         <icon src="res/android/telugutips_xhdpi.png" density="xhdpi" />

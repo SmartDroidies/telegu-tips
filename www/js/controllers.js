@@ -127,6 +127,7 @@ telegutipsControllers.controller('ListTipsCtrl', ['$scope', 'ArticleService', 'C
 		//console.log("Tip Category : " + categoryId);
 		var ctgry = Category.collectCategory(categoryId);
 		if(ctgry) {
+			window.analytics.trackView(ctgry.code);
 			//console.log("Category : " + JSON.stringify(ctgry));
 		}
 
@@ -200,6 +201,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    	    success(function(data) {
 	    	    	//console.log("JSON Data : " + JSON.stringify(data));	
 	    	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
+	    	    		window.analytics.trackView("Remote Tip View");
 						var remoteTip = data.tips[0];
 						remoteTip.poition = 0;
 	            		$scope.tip = remoteTip;
@@ -227,6 +229,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 			//console.log(tip.content);
 			tip.contentHtml = $sce.trustAsHtml(tip.content);
 			$scope.tip = tip;
+			window.analytics.trackView(ctgry.code + " Tip View");
 		}
 		$scope.category = ctgry;
 		$scope.size = tip.size;
@@ -287,7 +290,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    		console.error(error);
 	  		} else {
 	  			//console.log(res.URI);
-	  			//window.analytics.trackEvent('Share', 'Whatsapp', 'Tip', $scope.tip.id)
+	  			window.analytics.trackEvent('Share', 'Whatsapp', 'Tip', $scope.tip.id)
 	  			window.plugins.socialsharing.shareViaWhatsApp("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};
@@ -301,7 +304,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    		console.error(error);
 	  		} else {
 	  			//console.log(res.URI);
-	  			//window.analytics.trackEvent('Share', 'Facebook', 'Tip', $scope.tip.id)
+	  			window.analytics.trackEvent('Share', 'Facebook', 'Tip', $scope.tip.id)
 	  			window.plugins.socialsharing.shareViaFacebook("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};
@@ -315,7 +318,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    		console.error(error);
 	  		} else {
 	  			//console.log(res.URI);
-	  			//window.analytics.trackEvent('Share', 'Twitter', 'Tip', $scope.tip.id)
+	  			window.analytics.trackEvent('Share', 'Twitter', 'Tip', $scope.tip.id)
 	  			window.plugins.socialsharing.shareViaTwitter("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};

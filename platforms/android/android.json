@@ -9,19 +9,19 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "xml": "<feature name=\"Screenshot\"><param name=\"android-package\" value=\"com.darktalker.cordova.screenshot.Screenshot\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"PushPlugin\"><param name=\"android-package\" value=\"com.plugin.gcm.PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -41,19 +41,23 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"AdmobPlugin\"><param name=\"android-package\" value=\"com.admob.cordova.plugin.AdmobAdPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Screenshot\"><param name=\"android-package\" value=\"com.darktalker.cordova.screenshot.Screenshot\" /></feature>",
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"AdMob\"><param name=\"android-package\" value=\"com.rjfun.cordova.admob.AdMobPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -61,22 +65,52 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:exported=\"true\" android:name=\"com.plugin.gcm.PushHandlerActivity\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:name=\"com.plugin.gcm.CordovaGCMBroadcastReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><action android:name=\"com.google.android.c2dm.intent.REGISTRATION\" /><category android:name=\"com.smart.droid.telegu.tips\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:name=\"com.plugin.gcm.GCMIntentService\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:enabled=\"true\" android:name=\"com.google.android.gms.analytics.AnalyticsReceiver\"><intent-filter><action android:name=\"com.google.android.gms.analytics.ANALYTICS_DISPATCH\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"com.google.android.gms.analytics.AnalyticsService\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"true\" android:name=\"com.google.android.gms.analytics.CampaignTrackingReceiver\"><intent-filter><action android:name=\"com.android.vending.INSTALL_REFERRER\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:name=\"com.google.android.gms.analytics.CampaignTrackingService\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
+                            "count": 1
+                        }
+                    ],
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-                            "count": 1
+                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
+                            "count": 4
                         }
                     ],
                     "/manifest": [
@@ -108,44 +142,22 @@
                             "xml": "<uses-permission android:name=\"com.smart.droid.telegu.tips.permission.C2D_MESSAGE\" />",
                             "count": 1
                         }
-                    ],
-                    "/manifest/application": [
-                        {
-                            "xml": "<activity android:exported=\"true\" android:name=\"com.plugin.gcm.PushHandlerActivity\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:name=\"com.plugin.gcm.CordovaGCMBroadcastReceiver\" android:permission=\"com.google.android.c2dm.permission.SEND\"><intent-filter><action android:name=\"com.google.android.c2dm.intent.RECEIVE\" /><action android:name=\"com.google.android.c2dm.intent.REGISTRATION\" /><category android:name=\"com.smart.droid.telegu.tips\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:name=\"com.plugin.gcm.GCMIntentService\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"7327000\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" />",
-                            "count": 1
-                        }
                     ]
                 }
             }
         }
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
-        },
-        "org.apache.cordova.file-transfer": {
-            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
-        },
-        "nl.x-services.plugins.socialsharing": {
+        "com.darktalker.cordova.screenshot": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
         "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
         "de.appplant.cordova.plugin.email-composer": {
@@ -160,63 +172,56 @@
         "org.apache.cordova.dialogs": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
-        },
-        "com.admob.plugin": {
-            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
-        },
         "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
-        "com.darktalker.cordova.screenshot": {
+        "org.apache.cordova.file-transfer": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-            "id": "cordova-plugin-whitelist.whitelist",
-            "pluginId": "cordova-plugin-whitelist",
-            "runs": true
-        },
-        {
-            "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
-            "id": "org.apache.cordova.file-transfer.FileTransferError",
-            "pluginId": "org.apache.cordova.file-transfer",
-            "clobbers": [
-                "window.FileTransferError"
-            ]
-        },
-        {
-            "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
-            "id": "org.apache.cordova.file-transfer.FileTransfer",
-            "pluginId": "org.apache.cordova.file-transfer",
-            "clobbers": [
-                "window.FileTransfer"
-            ]
-        },
-        {
-            "file": "plugins/nl.x-services.plugins.socialsharing/www/SocialSharing.js",
-            "id": "nl.x-services.plugins.socialsharing.SocialSharing",
-            "pluginId": "nl.x-services.plugins.socialsharing",
-            "clobbers": [
-                "window.plugins.socialsharing"
+            "file": "plugins/com.darktalker.cordova.screenshot/www/Screenshot.js",
+            "id": "com.darktalker.cordova.screenshot.screenshot",
+            "merges": [
+                "navigator.screenshot"
             ]
         },
         {
             "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
             "id": "com.phonegap.plugins.PushPlugin.PushNotification",
-            "pluginId": "com.phonegap.plugins.PushPlugin",
             "clobbers": [
                 "PushNotification"
             ]
         },
         {
+            "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
+            "id": "cordova-plugin-google-analytics.UniversalAnalytics",
+            "clobbers": [
+                "analytics"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-whitelist/whitelist.js",
+            "id": "cordova-plugin-whitelist.whitelist",
+            "runs": true
+        },
+        {
             "file": "plugins/de.appplant.cordova.plugin.email-composer/www/email_composer.js",
             "id": "de.appplant.cordova.plugin.email-composer.EmailComposer",
-            "pluginId": "de.appplant.cordova.plugin.email-composer",
             "clobbers": [
                 "cordova.plugins.email",
                 "plugin.email"
@@ -225,7 +230,6 @@
         {
             "file": "plugins/hu.dpal.phonegap.plugins.SpinnerDialog/www/spinner.js",
             "id": "hu.dpal.phonegap.plugins.SpinnerDialog.SpinnerDialog",
-            "pluginId": "hu.dpal.phonegap.plugins.SpinnerDialog",
             "merges": [
                 "window.plugins.spinnerDialog"
             ]
@@ -233,7 +237,6 @@
         {
             "file": "plugins/org.apache.cordova.device/www/device.js",
             "id": "org.apache.cordova.device.device",
-            "pluginId": "org.apache.cordova.device",
             "clobbers": [
                 "device"
             ]
@@ -241,7 +244,6 @@
         {
             "file": "plugins/org.apache.cordova.dialogs/www/notification.js",
             "id": "org.apache.cordova.dialogs.notification",
-            "pluginId": "org.apache.cordova.dialogs",
             "merges": [
                 "navigator.notification"
             ]
@@ -249,31 +251,13 @@
         {
             "file": "plugins/org.apache.cordova.dialogs/www/android/notification.js",
             "id": "org.apache.cordova.dialogs.notification_android",
-            "pluginId": "org.apache.cordova.dialogs",
             "merges": [
                 "navigator.notification"
             ]
         },
         {
-            "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
-            "id": "org.apache.cordova.inappbrowser.inappbrowser",
-            "pluginId": "org.apache.cordova.inappbrowser",
-            "clobbers": [
-                "window.open"
-            ]
-        },
-        {
-            "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
-            "id": "com.admob.plugin.AdmobAd",
-            "pluginId": "com.admob.plugin",
-            "clobbers": [
-                "window.admob"
-            ]
-        },
-        {
             "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
             "id": "org.apache.cordova.file.DirectoryEntry",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.DirectoryEntry"
             ]
@@ -281,7 +265,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/DirectoryReader.js",
             "id": "org.apache.cordova.file.DirectoryReader",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.DirectoryReader"
             ]
@@ -289,7 +272,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/Entry.js",
             "id": "org.apache.cordova.file.Entry",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.Entry"
             ]
@@ -297,7 +279,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/File.js",
             "id": "org.apache.cordova.file.File",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.File"
             ]
@@ -305,7 +286,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileEntry.js",
             "id": "org.apache.cordova.file.FileEntry",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileEntry"
             ]
@@ -313,7 +293,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileError.js",
             "id": "org.apache.cordova.file.FileError",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileError"
             ]
@@ -321,7 +300,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileReader.js",
             "id": "org.apache.cordova.file.FileReader",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileReader"
             ]
@@ -329,7 +307,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileSystem.js",
             "id": "org.apache.cordova.file.FileSystem",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileSystem"
             ]
@@ -337,7 +314,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileUploadOptions.js",
             "id": "org.apache.cordova.file.FileUploadOptions",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileUploadOptions"
             ]
@@ -345,7 +321,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileUploadResult.js",
             "id": "org.apache.cordova.file.FileUploadResult",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileUploadResult"
             ]
@@ -353,7 +328,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/FileWriter.js",
             "id": "org.apache.cordova.file.FileWriter",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.FileWriter"
             ]
@@ -361,7 +335,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/Flags.js",
             "id": "org.apache.cordova.file.Flags",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.Flags"
             ]
@@ -369,7 +342,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/LocalFileSystem.js",
             "id": "org.apache.cordova.file.LocalFileSystem",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.LocalFileSystem"
             ],
@@ -380,7 +352,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/Metadata.js",
             "id": "org.apache.cordova.file.Metadata",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.Metadata"
             ]
@@ -388,20 +359,17 @@
         {
             "file": "plugins/org.apache.cordova.file/www/ProgressEvent.js",
             "id": "org.apache.cordova.file.ProgressEvent",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.ProgressEvent"
             ]
         },
         {
             "file": "plugins/org.apache.cordova.file/www/fileSystems.js",
-            "id": "org.apache.cordova.file.fileSystems",
-            "pluginId": "org.apache.cordova.file"
+            "id": "org.apache.cordova.file.fileSystems"
         },
         {
             "file": "plugins/org.apache.cordova.file/www/requestFileSystem.js",
             "id": "org.apache.cordova.file.requestFileSystem",
-            "pluginId": "org.apache.cordova.file",
             "clobbers": [
                 "window.requestFileSystem"
             ]
@@ -409,7 +377,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/resolveLocalFileSystemURI.js",
             "id": "org.apache.cordova.file.resolveLocalFileSystemURI",
-            "pluginId": "org.apache.cordova.file",
             "merges": [
                 "window"
             ]
@@ -417,7 +384,6 @@
         {
             "file": "plugins/org.apache.cordova.file/www/android/FileSystem.js",
             "id": "org.apache.cordova.file.androidFileSystem",
-            "pluginId": "org.apache.cordova.file",
             "merges": [
                 "FileSystem"
             ]
@@ -425,39 +391,50 @@
         {
             "file": "plugins/org.apache.cordova.file/www/fileSystems-roots.js",
             "id": "org.apache.cordova.file.fileSystems-roots",
-            "pluginId": "org.apache.cordova.file",
             "runs": true
         },
         {
             "file": "plugins/org.apache.cordova.file/www/fileSystemPaths.js",
             "id": "org.apache.cordova.file.fileSystemPaths",
-            "pluginId": "org.apache.cordova.file",
             "merges": [
                 "cordova"
             ],
             "runs": true
         },
         {
-            "file": "plugins/com.darktalker.cordova.screenshot/www/Screenshot.js",
-            "id": "com.darktalker.cordova.screenshot.screenshot",
-            "pluginId": "com.darktalker.cordova.screenshot",
-            "merges": [
-                "navigator.screenshot"
+            "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
+            "id": "org.apache.cordova.file-transfer.FileTransferError",
+            "clobbers": [
+                "window.FileTransferError"
+            ]
+        },
+        {
+            "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
+            "id": "org.apache.cordova.file-transfer.FileTransfer",
+            "clobbers": [
+                "window.FileTransfer"
+            ]
+        },
+        {
+            "file": "plugins/org.apache.cordova.inappbrowser/www/inappbrowser.js",
+            "id": "org.apache.cordova.inappbrowser.inappbrowser",
+            "clobbers": [
+                "window.open"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+            "id": "cordova-plugin-x-socialsharing.SocialSharing",
+            "clobbers": [
+                "window.plugins.socialsharing"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
+            "id": "cordova-plugin-admobpro.AdMob",
+            "clobbers": [
+                "window.AdMob"
             ]
         }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-whitelist": "1.0.0",
-        "org.apache.cordova.file-transfer": "0.5.0",
-        "nl.x-services.plugins.socialsharing": "4.3.18",
-        "com.phonegap.plugins.PushPlugin": "2.4.0",
-        "de.appplant.cordova.plugin.email-composer": "0.8.2",
-        "hu.dpal.phonegap.plugins.SpinnerDialog": "1.3.1",
-        "org.apache.cordova.device": "0.3.0",
-        "org.apache.cordova.dialogs": "0.3.0",
-        "org.apache.cordova.inappbrowser": "0.6.0",
-        "com.admob.plugin": "5.0.1",
-        "org.apache.cordova.file": "1.3.3",
-        "com.darktalker.cordova.screenshot": "0.1.5"
-    }
+    ]
 }
