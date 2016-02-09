@@ -1,5 +1,5 @@
 var testDevice = '9ff99ad5ec042ed6';
-var analyticsId = 'UA-71910213-4';
+var analyticsId = 'UA-71910213-5';
 var interDisplayed = false;
 
 // select the right Ad Id according to platform 
