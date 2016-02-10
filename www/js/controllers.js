@@ -172,8 +172,8 @@ telegutipsControllers.controller('TipCtrl', ['$scope', '$routeParams', 'StorageS
 }]);
 
 //Controller to display Tip Details
-telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', 'ArticleService', 'CategoryService', 'FavouriteService', 'StorageService', '$sce',
-	function($scope, $routeParams, Article, Category, Favourite, Storage, $sce) {
+telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', 'ArticleService', 'CategoryService', 'FavouriteService', 'StorageService', '$sce', '$http', '$location',
+	function($scope, $routeParams, Article, Category, Favourite, Storage, $sce, $http, $location) {
 
 	var appURL = "https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips";
 
@@ -201,7 +201,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    	    success(function(data) {
 	    	    	//console.log("JSON Data : " + JSON.stringify(data));	
 	    	    	if (!angular.isUndefined(data.tips) && data.tips.length > 0) {
-	    	    		window.analytics.trackView("Remote Tip View");
+	    	    		window.analytics.trackView("Notification - Remote Tip Viewed");
 						var remoteTip = data.tips[0];
 						remoteTip.poition = 0;
 	            		$scope.tip = remoteTip;
@@ -214,6 +214,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	    } else {
 	    	tip.position = 0;
 			$scope.tip = tip;
+			window.analytics.trackView("Notification - Internal Tip Viewed");
 			Storage.updateRead(tip.id);
 		}	
 	}	
