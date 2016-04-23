@@ -194,9 +194,9 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 
 	//Method to display selected tip detail
 	$scope.displaySelectedTipDetail = function (tipid) {        
-		var tip = Article.collectArticleByTipId(tipid);
+		var tip = Article.collectArticleByTipId(parseInt(tipid));
 		//console.log("Tip Detail : " + tip);
-		if(tip == null) {
+		if(tip === undefined || tip == null) {
 			$http.get('http://telugu.tips2stayhealthy.com/?json=y&id=' + tipid).
 	    	    success(function(data) {
 	    	    	//console.log("JSON Data : " + JSON.stringify(data));	
@@ -205,7 +205,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 						var remoteTip = data.tips[0];
 						remoteTip.poition = 0;
 	            		$scope.tip = remoteTip;
-	            		Storage.updateRead(tip.id);
+	            		Storage.updateRead(remoteTip.id);
 	            	} else {
 	            		//console.log("JSON Data : " + JSON.stringify(data));
 	            		$location.path('/home');  

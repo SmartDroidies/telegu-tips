@@ -8,13 +8,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
-        "id": "com.phonegap.plugins.PushPlugin.PushNotification",
-        "clobbers": [
-            "PushNotification"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
         "id": "cordova-plugin-google-analytics.UniversalAnalytics",
         "clobbers": [
@@ -241,6 +234,13 @@ module.exports = [
         "id": "cordova-plugin-admobpro.AdMob",
         "clobbers": [
             "window.AdMob"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-gcmpush/www/gcm.js",
+        "id": "cordova-plugin-gcmpush.GCMPush",
+        "clobbers": [
+            "GCMPush"
         ]
     }
 ];

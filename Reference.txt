@@ -1,0 +1,8 @@
+Server API Key - AIzaSyCKNr-bTJ1pjIRwgz-SwpuSe8knb6pBsrg
+
+Sender ID - 902409539351
+
+curl --header "Authorization: key=AIzaSyCKNr-bTJ1pjIRwgz-SwpuSe8knb6pBsrg" \
+       --header Content-Type:"application/json" \
+       https://gcm-http.googleapis.com/gcm/send \
+       -d "{ \"data\" : { \"title\" : \"Telugu Tips\", \"text\" : \"New Tip\", \"extra\" : \"3402\" }, \"to\" : \"APA91bHLCY8vcXfjuw4RpLa87YBYvmuRR6cQL7us6B_z67oaB7lj2rIvu2l2sgQcHmBSij16nORgE95ch6WnhC0hzCM9f7e_yTkRC4Q0-BqzneR7zLaCqm4RM17hO4PY-JArHH8oFBEL\" }"

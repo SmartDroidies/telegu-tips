@@ -82,15 +82,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.phonegap.plugins.PushPlugin": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/phonegap-build/PushPlugin.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-x-socialsharing": {
         "source": {
             "type": "registry",
@@ -153,6 +144,14 @@
             "id": "cordova-plugin-extension"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-gcmpush": {
+        "source": {
+            "type": "local",
+            "path": "../GCMPush"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }

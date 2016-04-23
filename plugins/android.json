@@ -10,9 +10,6 @@
         "com.darktalker.cordova.screenshot": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
-        "com.phonegap.plugins.PushPlugin": {
-            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
-        },
         "cordova-plugin-google-analytics": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
@@ -44,6 +41,9 @@
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         },
         "cordova-plugin-admobpro": {
+            "PACKAGE_NAME": "com.smart.droid.telegu.tips"
+        },
+        "cordova-plugin-gcmpush": {
             "PACKAGE_NAME": "com.smart.droid.telegu.tips"
         }
     },
