@@ -3,4 +3,7 @@
     <string name="app_name">Telugu Tips</string>
     <string name="launcher_name">@string/app_name</string>
     <string name="activity_name">@string/launcher_name</string>
+    
+    <string name="google_app_id">1:781897556091:android:6695c9cf44fc07de</string>
+    <string name="google_api_key">AIzaSyBuoPVVSF4RbMR70x85TRqFqK_CHLU0vNA</string>
 </resources>

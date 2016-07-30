@@ -28,16 +28,8 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
 	}
 ])
 
-/*
 //Global Functions
 .run(function($rootScope, $log, $mdSidenav, $mdDialog, $location) {
-
-	//Toggle nav
-  	$rootScope.toggleNav = function () {   
-        $mdSidenav('navbar')
-          .toggle()
-          .then(function () { $log.debug("toggle navbar is done"); } )
-    }
 
   	//Go Back
   	$rootScope.back = function () {        
@@ -51,12 +43,13 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
 
     //Share App
     $rootScope.share = function () {   
-      window.Firebase.trackEvent("App Share", device.uuid);
+      window.Firebase.trackEvent("Menu Action", "App Share");
       var platform = device.platform;
       if(platform == 'Android') {
-        window.plugins.socialsharing.share('Try this great Tamil App - ', '5000+ Tamil Tips', 'www/images/banner.png','https://play.google.com/store/apps/details?id=com.smart.droid.tamil.tips');
+        window.plugins.socialsharing.share('Try this great Tamil App - ', '1500+ Telugu Tips', 'www/images/banner.png','https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips');
       } else if(platform == "iOS") {
-        window.plugins.socialsharing.share('Try this great Tamil App - ', 'Kuripugal',null,'https://itunes.apple.com/app/id1072440433');
+      	$log.debug('IOS App Share');
+        //window.plugins.socialsharing.share('Try this great Tamil App - ', 'Kuripugal',null,'https://itunes.apple.com/app/id1072440433');
       } else {
         alert('Share not supported for : ' + platform);
       } 
@@ -89,6 +82,7 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
       });
     };
 
+    /*
     //Feedback
     $rootScope.disclaimer = function () {        
       window.Firebase.trackEvent("App Displaimer", device.uuid);
@@ -103,9 +97,9 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
     if(deviceUUID == testDevice) {
       $rootScope.isTestDevice = true;
     }
+    */
 
 })
-*/
 
 //Theme configure 
 .config(function($mdThemingProvider) {
@@ -176,13 +170,10 @@ telugutipsApp.config(function ($translateProvider) {
           HOME: 'Home',
 		  HEALTH_TIPS: 'Health Tips',
 		  BEAUTY_TIPS: 'Beauty Tips',
-		  KURAL: 'Kural',
-          BUTTON_LANG_EN: 'english',
-          BUTTON_LANG_DE: 'german',
           TIP:'Tip'
         });
         $translateProvider.translations('te', {
-          TITLE: '\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41 \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
+          TITLE: '',
           HOME: '\u0c39\u0c4b\u0c2e\u0c4d',
 		  HEALTH_TIPS: '\u0c06\u0c30\u0c4b\u0c17\u0c4d\u0c2f\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
 		  COOKING_TIPS: '\u0c35\u0c02\u0c1f\u0c3f\u0c02\u0c1f\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41', 
@@ -193,9 +184,6 @@ telugutipsApp.config(function ($translateProvider) {
 		  UNREAD_TAB: '\u0c1a\u0c26\u0c35\u0c28\u0c3f \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
 		  CATEGORY_TAB: '\u0c35\u0c3f\u0c2d\u0c3e\u0c17\u0c3e\u0c32\u0c41',
 		  FAVOURITE_TAB: '\u0c07\u0c37\u0c4d\u0c1f\u0c2e\u0c48\u0c28 \u0c1a\u0c3f\u0c1f\u0c4d\u0c15\u0c3e\u0c32\u0c41',
-          BUTTON_LANG_EN: 'englisch',
-          BUTTON_LANG_DE: 'deutsch'
         });
-        $translateProvider.preferredLanguage('te');
       });
 */

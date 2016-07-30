@@ -74,22 +74,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-google-analytics": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-google-analytics"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-x-socialsharing": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-x-socialsharing"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-device": {
         "source": {
             "type": "registry",
@@ -146,10 +130,18 @@
         "is_top_level": false,
         "variables": {}
     },
-    "cordova-plugin-gcmpush": {
+    "cordova-plugin-x-socialsharing": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-x-socialsharing"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-smart-firebase": {
         "source": {
             "type": "local",
-            "path": "../GCMPush"
+            "path": "../plugin-smart-firebase"
         },
         "is_top_level": true,
         "variables": {}

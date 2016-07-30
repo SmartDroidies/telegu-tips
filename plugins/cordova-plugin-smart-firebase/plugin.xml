@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-smart-firebase" version="0.0.1">
+    <name>Smart Google Firebase Plugin</name>
+    <description>Integrates with Firebase Features</description>
+    <author>SmartDroidies</author>
+    <keywords>analytics,firebase</keywords>
+    <license>MIT</license>
+    <js-module src="www/firebase.js" name="Firebase">
+    	<clobbers target="Firebase" />
+    </js-module>
+    <platform name="android">
+
+        <framework src="com.google.firebase:firebase-core:9.2.0" />
+        <framework src="com.google.firebase:firebase-messaging:9.2.0" />
+        <!--framework src="com.google.firebase:firebase-crash:9.0.2" />
+        <framework src="com.google.firebase:firebase-config:9.0.2" /-->
+
+        <config-file target="res/xml/config.xml" parent="/*">
+          <feature name="Firebase">
+            <param name="android-package" value="com.smart.droid.firebase.Firebase"/>
+            <param name="onload" value="true" />
+          </feature>
+        </config-file>
+
+        <config-file parent="/resources" target="res/values/strings.xml">
+            <string name="google_app_id">@string/google_app_id</string>
+        </config-file>  
+        <config-file parent="/resources" target="res/values/strings.xml">
+            <string name="google_api_key">@string/google_api_key</string>
+        </config-file>                      
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.smart.droid.firebase.FCMActivity" android:exported="true"/>
+            <service android:name="com.smart.droid.firebase.SmartFirebaseMessagingService">
+                <intent-filter>
+                    <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                </intent-filter>
+            </service>
+            <service android:name="com.smart.droid.firebase.SmartFirebaseInstanceIDService">
+                <intent-filter>
+                    <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                </intent-filter>
+            </service>
+            <!--receiver android:name="org.apache.cordova.firebase.OnNotificationOpenReceiver"></receiver-->
+        </config-file>
+        <!--source-file src="src/android/google-services.json" target-dir="." /-->
+        <source-file src="src/android/Firebase.java" target-dir="src/com/smart/droid/firebase" />
+        <!--source-file src="src/android/OnNotificationOpenReceiver.java" target-dir="src/org/apache/cordova/firebase" /-->
+        <source-file src="src/android/SmartFirebaseInstanceIDService.java" target-dir="src/com/smart/droid/firebase" />
+        <source-file src="src/android/SmartFirebaseMessagingService.java" target-dir="src/com/smart/droid/firebase" />
+        <source-file src="src/android/FCMActivity.java" target-dir="src/com/smart/droid/firebase" />
+        <!--framework src="src/android/build.gradle" custom="true" type="gradleReference" /-->
+    </platform>
+
+    <hook src="scripts/after_prepare.js" type="after_prepare" />
+
+</plugin>   

@@ -16,7 +16,7 @@ if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos
 document.addEventListener("deviceready", onDeviceReadyAction, false);
 function onDeviceReadyAction() {
 
-	window.analytics.startTrackerWithId(analyticsId);
+	//window.analytics.startTrackerWithId(analyticsId);
 	
 	//console.log(cordova.file);
 	//console.log(FileTransfer);
@@ -25,7 +25,7 @@ function onDeviceReadyAction() {
 	initializeAd();
 
     //Initialize for Google Cloud Messaging
-    initializeGCM();
+    //initializeGCM();
 
 
 }
