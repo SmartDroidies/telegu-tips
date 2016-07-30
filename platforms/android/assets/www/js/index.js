@@ -37,7 +37,7 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        angular.bootstrap(document, ['telugutipsApp']);
+        /* angular.bootstrap(document, ['telugutipsApp']); */
     }
 };
 

@@ -2,8 +2,104 @@
 
 /* Controllers */
 
-var telegutipsControllers = angular.module('telegutipsControllers', []);
+/* Controllers */
+angular.module('chitkalu.controllers', [])
 
+.controller('HomeCtrl', function(/*Category, Storage, TipList, */ $location, $rootScope, $log) {
+	/*	
+  this.categories = Category.getCategories();
+  this.tipcount =  TipList.getTipCount();
+
+  this.refresh = function() {
+    this.tipcount =  TipList.getTipCount(); 
+    $log.debug("Count Refreshed");   
+  };
+
+  this.clearStorage = function() {
+    Storage.clearStorage();
+    this.refresh();
+  };
+
+  this.updateStorage = function() {
+    this.syncStorage();
+  };
+
+  //Method to take to recipie listing
+	this.article = function (catId) {        
+    	var newpath = "/tips/" + catId;
+    	$location.path(newpath); 
+  };  
+
+  this.syncStorage = function() {
+    console.time("Remote Tips Sync");
+    $rootScope.syncing = true;
+    var syncPromise = Storage.sync();
+    syncPromise.then(function(success) {
+      $log.debug("Success Response : " + success);
+      console.timeEnd("Remote Tips Sync");
+      $rootScope.syncing = false;
+      $rootScope.synced = true;
+      navigator.splashscreen.hide();
+    }, function(failure) {
+      $log.debug("Failure Response : " + failure);
+      console.timeEnd("Remote Tips Sync");
+      $rootScope.syncing = false;
+      $rootScope.syncfail = true;
+      navigator.splashscreen.hide();
+    }, function(update) {
+      $log.debug("Update Response : " + update);
+    });
+  }
+
+	//Sync Tips from Server
+	if(!$rootScope.synced) {
+    Storage.checkDataVersion();
+    this.syncStorage();
+	}
+
+	/*
+	//Show Home Page
+	$scope.displayView = function () {    
+
+		$scope.screen = "HOME";
+		$scope.title = "TITLE";
+
+		if($rootScope.tab == 2) { 
+			$scope.displayCategories();
+		} else if ($rootScope.tab == 3) {
+			$scope.favourite = Article.collectFavourites();	
+		} else if ($rootScope.tab == 1) {
+			$scope.newtips = Article.collectNewTips();
+		} 	
+	}; 
+	
+	$scope.loadTip = function () {       
+		console.log('Take to Tip => ' + this.tipId);
+	};	
+
+	//Display Unread Articles View
+	$scope.unreadView = function() {
+		$scope.newtips = Article.collectNewTips();
+		$rootScope.tab = 1;
+    };
+
+	//Display Articles Category
+	$scope.ctgryView = function() {
+		$scope.displayCategories();
+		$rootScope.tab = 2;
+    };
+
+	//Display Favourite Articles
+	$scope.favouriteView = function() {
+		$scope.favourite = Article.collectFavourites();
+		//console.log("Favourites : " + $scope.favourite.length);
+		$rootScope.tab = 3;
+    };
+	*/
+})
+
+
+/*
 telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'CategoryService', 'StorageService', '$rootScope',
   function($scope, Article, categoryService, StorageService, $rootScope) {
 
@@ -78,17 +174,6 @@ telegutipsControllers.controller('HomeCtrl', ['$scope', 'ArticleService',  'Cate
   				//FIXME - Display Error
     			console.log('No Categories Found.');
   			});
-	
-		/*
-		var tips = Article.fetchArticles();
-		if (tips === undefined || tips === null) {
-			//$scope.arokyam = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 5);}).size().value();
-			//$scope.samayal = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 3);}).size().value();
-			//$scope.naattu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 10);}).size().value();
-			//$scope.azagu = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 6);}).size().value();
-			//$scope.kural = _.chain(tips).filter(function(tip){ return _.contains(tip.category, 11);}).size().value();
-		}
-		*/
 	}; 
 	
 	$scope.loadTip = function () {       
@@ -292,7 +377,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	  		} else {
 	  			//console.log(res.URI);
 	  			window.analytics.trackEvent('Share', 'Whatsapp', 'Tip', $scope.tip.id)
-	  			window.plugins.socialsharing.shareViaWhatsApp("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
+	  			window.plugins.socialsharing.shareViaWhatsApp("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() {}, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};
 
@@ -306,7 +391,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	  		} else {
 	  			//console.log(res.URI);
 	  			window.analytics.trackEvent('Share', 'Facebook', 'Tip', $scope.tip.id)
-	  			window.plugins.socialsharing.shareViaFacebook("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
+	  			window.plugins.socialsharing.shareViaFacebook("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { }, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};
 
@@ -320,7 +405,7 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	  		} else {
 	  			//console.log(res.URI);
 	  			window.analytics.trackEvent('Share', 'Twitter', 'Tip', $scope.tip.id)
-	  			window.plugins.socialsharing.shareViaTwitter("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { /* console.log('share ok') */ }, function(errormsg){alert(errormsg) });
+	  			window.plugins.socialsharing.shareViaTwitter("Telugu Tips - " + $scope.tip.title, res.URI, appURL, function() { }, function(errormsg){alert(errormsg) });
 	  		}}, 50);
 	};
 
@@ -329,5 +414,5 @@ telegutipsControllers.controller('CategoryTipCtrl', ['$scope', '$routeParams', '
 	$scope.displaySelectedTip();
 
 }]);	
-
+*/
 

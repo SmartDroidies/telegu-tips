@@ -1,79 +1,37 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-  <title class="i18n" id="app.title">Telugu Tips</title>
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/telegutips.css">
-  <script src="js/angular/angular.js"></script>
-  <script src="js/angular-route/angular-route.min.js"></script>
-  <script src="js/jquery/jquery.min.js"></script>
-  <script src="js/underscore/underscore.js"></script>    
-  <script src="js/angular-resource/angular-resource.min.js"></script>    
-  <script src="js/angular-sanitize/angular-sanitize.min.js"></script>
-  <script src="js/angular-touch/angular-touch.min.js"></script>
-  <script src="js/angular-translate/angular-translate.min.js"></script>
-  <script type="text/javascript" src="js/gesture/hammer.js"></script>
-  <script type="text/javascript" src="js/gesture/angular.hammer.js"></script>  
-  <script src="js/underscore/angular-underscore-module.js"></script>  
-  <script src="js/jquery-i18n-properties/jquery.i18n.properties.js"></script>
-  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
-  <script type="text/javascript" charset="utf-8" src="js/index.js"></script>  
-  <script src="js/telegutips.js"></script>       
-  <script src="js/app.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/services.js"></script>
-  <!--script src="js/notify.js"></script-->
-  <script src="js/filters.js"></script>
-  <script src="js/directive.js"></script>
-</head>
-<body class="col-xs-12 nomargin paddless">
-    
-    <!-- Header -->
-    <!--nav class="navbar navbar-default navbar-fixed-top nav-telugu" role="navigation">
-      <div class="container-fluid">
-      <div class="navbar-header main-header">
-        <img id="menu-cntrl" class="menu-control" src="images/menu.png"/>
-        <div class="head_section">
-          <h2  id="main-title" class="main-title">{{ 'TITLE' | translate }}</h2>
-        </div>
-        <img id="setting-cntrl" class="setting-control" src="images/setting.png"/>
-      </div>
-      </div>
-    </nav-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: http://telugu.tips2stayhealthy.com">
 
-    <!--Body content-->
-    <div ng-view class="content col-xs-12">
-    </div>
+    <link href="js/lib/angular-material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/telegutips.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title class="i18n" id="app.title">Telugu Tips</title>
 
-    <!-- Left Main Menu -->
-    <!--div id="menu" class="menu">
-      <ul class="nav nav-list">
-        <li><a href="#/home" onclick="hidePopup()">{{ 'HOME' | translate }}</a></li>         
-        <li><a href="#/tips/2" onclick="hidePopup()">{{ 'HEALTH_TIPS' | translate }}</a></li>
-        <li><a href="#/tips/1" onclick="hidePopup()">{{ 'BEAUTY_TIPS' | translate }}</a></li>
-        <li><a href="#/tips/5" onclick="hidePopup()">{{ 'HOME_REMEDIES' | translate }}</a></li>
-        <li><a href="#/tips/4" onclick="hidePopup()">{{ 'COOKING_TIPS' | translate }}</a></li>
-        <li><a href="#/tips/3" onclick="hidePopup()">{{ 'HOME_TIPS' | translate }}</a></li>
-      </ul>
-    </div-->
+  </head>
+  <body ng-app="telugutipsApp" ng-view ng-cloak="">
 
-    <!-- Settings Menu -->
-    <!--div id="setting" class="setting">
-      <ul class="nav nav-list">
-          <li><a href="#share" onclick="share()">Share</a></li>
-          <li><a href="#rate" onclick="rate()">Rate Me</a></li>
-          <li><a href="#feedback" onclick="feedback()">Feedback</a></li>
-      </ul>
-    </div-->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/lib/angular.js"></script>
+    <script src="js/lib/angular-route.js"></script>
+    <script src="js/lib/angular-animate.js"></script>
+    <script src="js/lib/angular-aria.js"></script>
+    <script src="js/lib/angular-messages.js"></script>
+    <script src="js/lib/angular-material.js"></script>
+    <script src="js/lib/angular-sanitize.min.js"></script>
+    <script src="js/lib/i18next-1.8.0.js"></script>
+    <script src="js/lib/ng-i18next.min.js"></script>
+    <script src="js/lib/underscore.js"></script>    
+    <script src="js/lib/angular-underscore-module.js"></script>  
+    <script src="js/lib/jquery.min.js"></script>
 
-    <!-- Div to display status -->  
-    <!--div id="app-status-div">
-      <ul id="app-status-ul">
-        <li>Cordova PushNotification Plugin Demo</li>
-      </ul>
-    </div-->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directive.js"></script>
+    <script src="js/telegutips.js"></script>   
 
-</body>
+  </body>
 </html>
