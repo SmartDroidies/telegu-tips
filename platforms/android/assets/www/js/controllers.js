@@ -5,9 +5,10 @@
 /* Controllers */
 angular.module('chitkalu.controllers', [])
 
-.controller('HomeCtrl', function(/*Category, Storage, TipList, */ $location, $rootScope, $log) {
-	/*	
+.controller('HomeCtrl', function(Category, /* Storage, TipList, */ $location, $rootScope, $log) {
   this.categories = Category.getCategories();
+
+/*	
   this.tipcount =  TipList.getTipCount();
 
   this.refresh = function() {

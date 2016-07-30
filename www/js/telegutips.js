@@ -16,17 +16,8 @@ if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos
 document.addEventListener("deviceready", onDeviceReadyAction, false);
 function onDeviceReadyAction() {
 
-	//window.analytics.startTrackerWithId(analyticsId);
-	
-	//console.log(cordova.file);
-	//console.log(FileTransfer);
-
 	// Manage Ad
 	initializeAd();
-
-    //Initialize for Google Cloud Messaging
-    //initializeGCM();
-
 
 }
 
@@ -35,43 +26,6 @@ function hidePopup() {
 	hideSetting();
 }
 
-function hideMenu() {
-	$("#menu").hide(200);
-}
-
-function hideSetting() {
-	$("#setting").hide(200);
-}
-
-
-//Share the app link with user
-function share() {
-	window.plugins.socialsharing.share('Try this great Telugu App - ', 'Telugu Tips',null,'https://play.google.com/store/apps/details?id=com.smart.droid.telegu.tips');
-	hidePopup();
-}
-
-//Provide Feedback
-function feedback() {
-	window.plugin.email.open({
-		to:      ['tips2stayhealthy@gmail.com'],
-		subject: 'Feedback on Telugu Tips',
-		body:    '',
-		isHtml:  true
-	});
-	hidePopup();
-}
-
-//Rate App
-function rate() {
-	var version = device.platform;
-	hidePopup();
-	if(version == "Android") {
-		var url = "market://details?id=com.smart.droid.telegu.tips";
-        window.open(url,"_system");		
-	} else {
-		//var url = "https://play.google.com/store/apps/details?id=com.smart.droid.telugu.tips"
-	}
-}
 
 //Load Initial Tips
 function loadInitialTips() {
@@ -240,6 +194,7 @@ function onReceiveFail (message) {
 } 
 
 
+/*
 //Initialize Google Clould Messaging
 function initializeGCM() {
   window.GCMPush.register(successHandlerGCM, errorHandlerGCM, {
@@ -268,6 +223,6 @@ function onNotification(id) {
     window.location = landingPath;
   }  
 }
-
+*/
 
 

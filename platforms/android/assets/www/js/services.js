@@ -1,4 +1,34 @@
-/* Services */
+/* Cache Services */
+var cacheServices = angular.module('chitkalu.cache', []);
+cacheServices.factory('Cache', function ($cacheFactory) {
+	return $cacheFactory('chitkalu-cache');
+});
+
+angular.module('chitkalu.services', [])
+
+/* Manage Category */
+.service("Category", function($http, $q, Cache) {
+
+
+	var categories = [{"code": "HOME", "id": "0", "label": "pirivu.home", "order": "1"},
+		{"code": "HEALTH_TIPS", "id":	"2", "imageUrl": "images/health_tips.png", "order": "2", "label": "pirivu.health"},
+		{"code": "BEAUTY_TIPS", "id":	"1", "imageUrl": "images/beauty_tips.png", "order": "3", "label": "pirivu.beauty"},
+		{"code": "HOME_REMEDIES", "id":	"5", "imageUrl": "images/home_remedies.png", "order": "4", "label": "pirivu.remedies"},
+		{"code": "COOKING_TIPS", "id":	"4", "imageUrl": "images/cooking_tips.png", "order": "5", "label": "pirivu.cooking"},
+		{"code": "HOME_TIPS", "id":	"3", "imageUrl": "images/home_tips.png", "order": "6", "label": "pirivu.home"},
+		{"code": "EXERCISE_TIPS", "id":	"1061", "imageUrl": "images/exercise_tips.png", "order": "7", "label": "pirivu.exercise"}];
+
+	return {
+		getCategories: function() {
+			var sorted = _.sortBy(categories, 'order'); 
+			return sorted;
+		}
+	};
+});
+
+
+
+/*
 var telegutipsServices = angular.module('telegutipsServices', ['ngResource']);
 telegutipsServices.factory('Tips', ['$resource',
 	function($resource){
@@ -175,7 +205,6 @@ telegutipsServices.factory ('StorageService', function () {
 	return storageFactory;
 }); 
 
-/* Cache Services */
 var cacheServices = angular.module('cacheService', []);
 cacheServices.factory('cacheService', ['$cacheFactory', function ($cacheFactory) {
 			return $cacheFactory('tips-cache');
@@ -469,3 +498,4 @@ telegutipsServices.factory ('FavouriteService', function () {
 	
 	return favouriteFactory;
 }); 
+*/
