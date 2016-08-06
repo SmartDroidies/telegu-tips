@@ -1,6 +1,6 @@
 'use strict';
 /* App Module */
-angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18next', 'underscore', 'chitkalu.controllers', 'chitkalu.services', 'chitkalu.cache'])
+angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18next', 'underscore', 'chitkalu.controllers', 'chitkalu.services', 'chitkalu.cache','telegutipsFilters'])
 
 .config(['$routeProvider', 
 	function ($routeProvider) {
@@ -8,11 +8,11 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
 			templateUrl : 'partials/home.html',
 			controller : 'HomeCtrl',
 			controllerAs: 'homeCtrl'
-		/* }).when('/tips/:cat', {
+		}).when('/tips/:cat', {
 			templateUrl : 'partials/tips.html',
 			controller : 'TipsCtrl',
 			controllerAs: 'tipsCtrl'
-	  	}).when('/tip/detail/:index', {
+	  }).when('/tip/detail/:index', {
 	        templateUrl : 'partials/tip.html',
 	        controller : 'TipCtrl',
 	        controllerAs: 'tipCtrl'
@@ -21,7 +21,7 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
 		    controller : 'TipCtrl',
 		    controllerAs: 'tipCtrl'
 		}).when('/disclaimer', {
-			templateUrl : 'partials/disclaimer.html', */
+			templateUrl : 'partials/disclaimer.html',
 		}).otherwise({
 			redirectTo : '/home'
 		});
@@ -31,7 +31,13 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
 //Global Functions
 .run(function($rootScope, $log, $mdSidenav, $mdDialog, $location) {
 
-  	//Go Back
+  	//Toggle nav
+    $rootScope.toggleNav = function () {   
+        $mdSidenav('navbar')
+          .toggle()
+          .then(function () { $log.debug("toggle navbar is done"); } )
+    }
+    //Go Back
   	$rootScope.back = function () {        
   		window.history.back();
   	};  
@@ -92,13 +98,13 @@ angular.module('telugutipsApp', ['ngRoute', 'ngSanitize', 'ngMaterial', 'jm.i18n
         parent: angular.element(document.body)
       });
     };
+    */
 
     var deviceUUID = device.uuid;
     //$log.debug("Device Id : " + deviceUUID + " -  Test Device : " + testDevice);
     if(deviceUUID == testDevice) {
       $rootScope.isTestDevice = true;
     }
-    */
 
 })
 
@@ -122,44 +128,3 @@ angular.module('jm.i18next').config(['$i18nextProvider', function ($i18nextProvi
         defaultLoadingValue: '' // ng-i18next option, *NOT* directly supported by i18next
     };
 }]);
-
-
-/*
-telugutipsApp.config(function ($provide) {
-  $provide.value('CAT_5', 'HEALTH_TIPS');
-  $provide.value('CAT_3', 'COOKING_TIPS');
-  $provide.value('CAT_10', 'TREATMENT');
-  $provide.value('CAT_6', 'BEAUTY_TIPS');
-  $provide.value('CAT_11', 'KURAL');
-});
-*/
-
-/*
-telugutipsApp.config(['$routeProvider', 
-		function ($routeProvider) {
-			$routeProvider.when('/home', {
-				templateUrl : 'partials/home.html',
-				controller : 'HomeCtrl'
-			}).
-			when('/tips/:cat', {
-				templateUrl : 'partials/tips.html',
-				controller : 'ListTipsCtrl'
-			}).
-			when('/tip/:id', {
-				templateUrl : 'partials/tip.html',
-				controller : 'CategoryTipCtrl'
-			}).
-			when('/tip/:cat/:index', {
-				templateUrl : 'partials/tip.html',
-				controller : 'CategoryTipCtrl'
-			}).
-			when('/tip/:cat/:id', {
-				templateUrl : 'partials/tip.html',
-				controller : 'CategoryTipCtrl'
-			}).
-			otherwise({
-				redirectTo : '/home'
-			});
-		}
-	]);
-*/

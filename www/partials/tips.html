@@ -1,27 +1,52 @@
-<div class="main col-xs-12">
-	 <!-- Header -->
-    <nav class="navbar nav-telugu navbar-fixed-top col-xs-12" role="navigation">
-      <div class="navbar-header main-header col-xs-12">
-        <img id="menu-cntrl" class="menu-control" src="images/back.png" onclick="history.back();"/>
-        <div class="head_section col-xs-12">
-          <h2  id="main-title" class="main-title-tips col-xs-12">{{ category.code | translate }}</h2>
+<!-- Toolbar -->
+<md-toolbar class="toolbar" layout="row">
+  <div class="md-toolbar-tools filled" data-ng-hide="tipsCtrl.searchmode">
+    <md-button aria-label="Menu" class="md-icon-button kuripu-icon-cnt" ng-click="home()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">keyboard_backspace</md-icon>
+    </md-button>
+    <h2 class="md-flex title-head">{{'app.name' | i18next}}</h2>
+    <span flex></span>
+    <md-button aria-label="UnFavourite" class="md-icon-button kuripu-icon-cnt" ng-if="!favourites" ng-click="tipsCtrl.viewFavourites()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">favorite_border</md-icon>
+    </md-button>
+    <md-button aria-label="Favourite" class="md-icon-button kuripu-icon-cnt" ng-if="favourites" ng-click="tipsCtrl.viewAll()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">favorite</md-icon>
+    </md-button>
+    <md-button aria-label="Search" class="md-icon-button kuripu-icon-cnt" ng-click="tipsCtrl.viewSearch()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">search</md-icon>
+    </md-button>
+  </div>    
+  <div class="md-toolbar-tools filled" data-ng-show="tipsCtrl.searchmode">
+    <md-button aria-label="Menu" class="md-icon-button kuripu-icon-cnt" ng-click="tipsCtrl.closeSearch()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">keyboard_backspace</md-icon>
+    <!--img src="assets/images/bookmark.png" style="my-img-button" alt="Bookmark"-->
+    </md-button>
+    <md-input-container md-no-float class="md-accent search-field">
+      <input ng-model="tipsCtrl.searchInput" placeholder="Search here" style="color:wheat;">
+    </md-input-container>
+    <span flex></span>
+    <md-button aria-label="Search" class="md-icon-button kuripu-icon-cnt" ng-click="tipsCtrl.search()">
+      <md-icon md-menu-origin class="material-icons kuripu-icon">&#xE163;</md-icon>
+    </md-button>
+  </div>    
+</md-toolbar>
+<md-content class="fill-height">
+    <md-virtual-repeat-container id="tips-container">
+      <div md-virtual-repeat="tip in tipsCtrl.tips" md-on-demand="" class="repeated-item" flex="" layout="column" id="anchor{{$index}}">
+        <div ng-if="isTestDevice" flex="" class="test-device" layout="row">
+            <div flex="10" layout-align="top start">{{$index + 1}}</div>
+            <div flex="70" layout-align="top start">{{tip.pts}}</div>
+            <div flex="20" layout-align="top end">{{tip.id}}</div>
         </div>
+        <div flex="" layout="row">
+          <div flex="75" class="md-list-item-text" layout="column">
+            <div layout-align="center center">
+              <a ng-href="#/tip/detail/{{$index}}" class="list-item-link"><h4 class="tip-label layout-padding layout-margin-empty unread_{{tip.new}}" flex>{{tip.title}}</h4></a>
+            </div> 
+            <!--div class="article-date" layout-align="end end">{{tip.posttime}}</div--> 
+          </div>
+          <div layout-align="center center" layout-fill ng-bind-html="tip.content | feedicon" flex="25"></div>
+        </div>  
       </div>
-    </nav>
-
-	<!--Body content-->
-	<div id="tips-list" class="list col-xs-12">
-		<div class="list-group tip-list" ng-repeat="tip in tips">
-			<a href="#/tip/{{category.id}}/{{$index}}" class="list-group-item">
-				<div class="tip-listitem-content">
-					<h4 class="list-group-item-heading"><span ng-bind-html="tip.title"></span></h4>
-					<!--span class="feed-date">{{feed.publishedDate |  toLongDate}}</span--> 
-				</div>	
-				<div class="tip-listitem-icon">	
-					<p ng-bind-html="tip.content | feedicon" class="list-group-item-text" ></p>
-				</div>	
-			</a>
-		</div>	
-	</div>
-
-</div>	
+    </md-virtual-repeat-container>
+</md-content>

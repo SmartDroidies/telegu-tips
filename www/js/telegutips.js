@@ -1,15 +1,39 @@
-var testDevice = '9ff99ad5ec042ed6';
+var testDevice = 'b479b2f557b8eea7##';
 var analyticsId = 'UA-71910213-5';
 var GCMSenderId = '902409539351';
 var interDisplayed = false;
+//08022016
+var platformios = "ios";
+var platformand = "android";
+
+var C_URL = 'http://telugu.tips2stayhealthy.com/?json=y';
+var C_WEB_URL = 'http://telugu.tips2stayhealthy.com/';
+var C_KEY_TIPS = "tips";
+var C_CACHE_TIPS = "cache_tips";
+var C_KEY_SYNCTIME =  "sync_time";
+var C_KEY_DATAVERSION =  "data_version";
+var C_CACHE_LIST = "cache-list-tips";
+var C_KEY_FAVOURITE =  "favourite";
+var C_DATA_VERSION = 2;
+
+var C_APP_WHATSAPP =  "whatsapp";
 
 // select the right Ad Id according to platform 
 var admobid = {};
 if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos 
+	platform = platformand;
 	admobid = {
 		banner: 'ca-app-pub-8439744074965483/8900243253', 
 		interstitial: 'ca-app-pub-8439744074965483/7423510059'
     };
+}
+    //08022016
+    else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios 
+	platform = platformios;
+	admobid = {
+		banner: 'ca-app-pub-8439744074965483/2445856051', 
+		interstitial: 'ca-app-pub-8439744074965483/8352788855'
+	};
 } 
 
 //Device Ready Event
@@ -19,11 +43,27 @@ function onDeviceReadyAction() {
 	// Manage Ad
 	initializeAd();
 
+	//Initialize for Firebase Cloud Messaging
+  	initializeFCM();
+
+	//Offset Topd Margin for IOS
+	offsetTop();
+
+
 }
 
-function hidePopup() {
-	hideMenu();
-	hideSetting();
+//Disclaimer
+function disclaimer() {
+	hidePopup();
+	//showOverlay();
+    $("#disclaimer").dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });	
 }
 
 
@@ -46,7 +86,6 @@ function loadInitialTips() {
 	});
 }
 
-/*
 // Function to download latest Tips JSON
 function downloadLatestTips() {
 	var message = "Synchronizing Latest Tips...";
@@ -118,7 +157,6 @@ function syncLocalStorage(file) {
 		//ActivityIndicator.hide();
 	});
 }
-*/
 
 //Exit Implementation
 document.addEventListener("backbutton", function() {
@@ -143,27 +181,35 @@ function exitAppPopup() {
     return false;
 }
 
+/* Ad initialization & display */
 
 function initializeAd() {
+  createBanner();
+  prepareInter();
+}
 
-	if(!isTestDevice()) {
-		if(AdMob) AdMob.createBanner( {
-			adId: admobid.banner, 
-			position: AdMob.AD_POSITION.BOTTOM_CENTER, 
-			autoShow: true 
-		} );
-	}
-			
-	// preppare and load ad resource in background, e.g. at begining of game level 
-	if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+function createBanner() {
+  var testFlag = isTestDevice();
 
+  if(AdMob) AdMob.createBanner( {
+    adId: admobid.banner, 
+    position: AdMob.AD_POSITION.BOTTOM_CENTER, 
+    autoShow: true, 
+    isTesting: testFlag  
+  } );
+}
+
+function prepareInter() {
+  var testFlag = isTestDevice();
+  if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false, isTesting: testFlag} );
 }
 
 function isTestDevice() {
+	console.log("Test Device : " + device.uuid);
     var flgTestDevice = false;
     var deviceUUID = device.uuid;
     if(deviceUUID == testDevice) {
-      //console.log("Test Device : " + device.uuid);
+      console.log("Test Device : " + device.uuid);
       flgTestDevice = true;
     }
     //flgTestDevice = false;
@@ -172,12 +218,15 @@ function isTestDevice() {
 
 //Load AdMob Interstitial Ad
 function showInterstitial() {
-	if(!isTestDevice() && !interDisplayed) {
-		if(AdMob) {
-			AdMob.showInterstitial();
-			interDisplayed = true;
-		}	
-	}    
+  if(interDisplayed > 2) {
+    if(AdMob) {
+      AdMob.showInterstitial();
+      interDisplayed = 0;
+    } 
+  } else {
+    interDisplayed = interDisplayed + 1;
+    //console.log("Interstitial Displayed : " + interDisplayed);
+  }    
 }
 
 function onInterstitialReceive (message) {
@@ -192,37 +241,62 @@ function onReceiveFail (message) {
     }
     //console.log("load fail: " + message.type + "  " + msg);
 } 
-
-
-/*
-//Initialize Google Clould Messaging
-function initializeGCM() {
-  window.GCMPush.register(successHandlerGCM, errorHandlerGCM, {
-      "senderId" : GCMSenderId,
-      "jsCallback" : "onNotification"
-  });
-
+//08022016
+document.addEventListener("onAdDismiss", function(data) {
+	//alert("Interstitial Ad Dismissed ");
+	//console.log("Interstitial Ad Dismissed : " + data.adType);
+	if (data.adType == 'interstitial') {
+		//alert("Ad interstitial Dismiss");
+		if(AdMob) AdMob.prepareInterstitial( {adId:admobid.interstitial, autoShow:false} );
+	}
+});
+function showOverlay() {
+	var overlay = jQuery('<div id="overlay"> </div>');
+	overlay.appendTo(document.body);
 }
 
-//Success Handler for GCM Resgistration
-function successHandlerGCM(result) {
-  //console.log("GCM Successfully Registered. Token: " + result.gcm);
+function removeOverlay() {
+    $("#overlay").remove();
 }
 
-//Failure Handler for GCM Resgistration
-function errorHandlerGCM(error) {
-  console.log("GCM Registration Error: " + error);
+//Offset Top Margin for IOS
+function offsetTop() {
+	var platform = device.platform;
+	//console.log('Paltform : ' +  platform);
+    if(platform === platformios && parseFloat(window.device.version) >= 7.0) {
+        //console.log('Margin Top : ' +  document.body.style.marginTop);
+        document.body.style.marginTop = "20px";
+    }
+
+	if(platform === platformios) {
+		//$("#right-menu-cntrl").hide();
+		//$("#setting-cntrl").hide();
+    }	
+}
+
+//Initialize Firebase Clould Messaging
+function initializeFCM() {
+  window.Firebase.getInstanceId(successHandlerFCM, errorHandlerFCM, {});
+}
+
+//Success Handler for FCM Resgistration
+function successHandlerFCM(result) {
+  //console.log("FCM Successfully Registered. Token: " + result);
+}
+
+//Failure Handler for FCM Resgistration
+function errorHandlerFCM(error) {
+	//FIXME - Firebase Analytics
+  console.log("FCM Registration Error: " + error);
 }
 
 //GCM Notification Recieved
 function onNotification(id) {
-  //console.log("Event Received: " + id);  
+  //console.log("Event Received: " + id); 
   if(!isNaN(id)) {
-    //console.log("Go to quote : " + id);
-    var landingPath = "#/tip/" + id;
-    window.location = landingPath;
-  }  
+      //FIXME - Track in Firebase
+      //window.analytics.trackEvent('GCM', 'New Tip', 'Tip - ' + id)
+      var landingPath = "#/tip/" + id;
+      window.location = landingPath;
+  }
 }
-*/
-
-

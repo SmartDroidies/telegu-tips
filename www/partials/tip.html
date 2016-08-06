@@ -1,35 +1,56 @@
-<div class="main col-xs-12">
-	 <!-- Header -->
-    <nav class="navbar nav-telugu navbar-fixed-top col-xs-12" role="navigation">
-      <div class="navbar-header main-header col-xs-12">
-        <img id="menu-cntrl" class="menu-control" ng-src="images/back.png" onclick="history.back();"/>
-        <div class="head_section col-xs-12">
-	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position">{{ category.code | translate }} {{tip.position}} of {{tip.size}}</h2> 
-	        <h2 id="main-title" class="main-title-tip" ng-if="tip.position == 'undefined'">{{ category.code | translate }} </h2> 
+
+<!-- Toolbar -->
+<md-toolbar class="toolbar">
+    <div class="md-toolbar-tools filled">
+        <md-button aria-label="Menu" class="md-icon-button kuripu-icon-cnt" ng-click="back()">
+            <md-icon md-menu-origin class="material-icons kuripu-icon">keyboard_backspace</md-icon>
+        </md-button>
+        <h2 class="md-flex title-head">{{'app.name' | i18next}}</h2>
+        <span flex></span>
+        <md-button aria-label="UnFavourite" class="md-icon-button kuripu-icon-cnt" ng-if="!tipCtrl.tip.favourite" ng-click="tipCtrl.favourite($event, tipCtrl.tip)">
+          <md-icon md-menu-origin class="material-icons kuripu-icon">favorite_border</md-icon>
+        </md-button>
+        <md-button aria-label="Favourite" class="md-icon-button kuripu-icon-cnt" ng-if="tipCtrl.tip.favourite" ng-click="tipCtrl.unfavourite($event, tipCtrl.tip)">
+          <md-icon md-menu-origin class="material-icons kuripu-icon">favorite</md-icon>
+        </md-button>
+   </div>   
+</md-toolbar>
+
+<!-- Tip Detail -->
+<md-content layout="column" flex md-swipe-right="tipCtrl.prev()" md-swipe-left="tipCtrl.next()">
+    <div filled layout="column" id="tip-head">
+        <h4 class="layout-padding layout-margin md-warn md-hue-4 tip-head" flex="">{{tipCtrl.tip.title}}</h4>
+        <div flex="" layout="row" layout-align="end end" class="post-date">{{tipCtrl.tip.pts}}</div>
+    </div> 
+    <md-divider></md-divider>
+    <div class="tip-content" flex layout-padding layout-fill format-content ng-bind-html="tipCtrl.tip.content | breaklines"></div>
+    <section layout="row" layout-fill>
+        <md-button class="md-primary md-raised" ng-if="tipCtrl.tip.prv" ng-click="tipCtrl.prev()">Previous</md-button>
+        <div flex layout-align="center center" layout="row">
+          <md-button class="md-primary md-raised" ng-click="tipCtrl.showGridBottomSheet(tipCtrl.tip)">Share</md-button>
         </div>
-      	<img id="img-favourite" class="favourite" ng-src="images/favorite.png" ng-if="tip.favourite" ng-click="unfavourite($event, tip)"/>
-      	<img id="img-unfavourite" class="favourite" ng-src="images/unfavorite.png" ng-if="!tip.favourite"  ng-click="favourite($event, tip)" />
-        <!--img id="img-share" alt="Share" class="share" src="images/share.png" ng-click="share($event, tip)"/-->
-        <img id="img-share" alt="Share" class="share" ng-src="images/share.png" ng-click="showShareMenu()"/>
-      </div>
-    </nav>
+        <md-button class="md-primary md-raised" ng-if="tipCtrl.tip.nxt" ng-click="tipCtrl.next()">Next</md-button>
+    </section>    
+</md-content>
 
-	<div class="tip col-xs-12" ng-swipe-left="older({{index}})" ng-swipe-right="newer({{index}})">
-		<input type="hidden" id="sequence" ng-model="tip.position"/></input>
-		<input type="hidden" ng-model="tip.size"/></input>
-		<h4 id="tip-title" class="tip-head"><span ng-bind-html="tip.title"></span></h4>
-		<div class="tip-content" format-content ng-bind-html="tip.content"></div>
-	</div>	
-</div>	
 
-<div id="share_menu" class="share_menu">
-  <div>
-    <img ng-click="shareViaFacebook()" ng-src="images/facebook.png" class="share-icon" />
-  </div>
-  <div>
-    <img ng-click="shareViaTwitter()" ng-src="images/twitter.png" class="share-icon" />
-  </div>  
-  <div>
-    <img ng-click="shareViaWhatsapp()" ng-src="images/whatsApp.png" class="share-icon" />
-  </div>  
-</div>
+<script type="text/ng-template" id="bottom-sheet-grid-template.html">
+    <md-bottom-sheet class="md-grid" layout="column" ng-cloak style="position: fixed">
+        <div>
+            <md-list flex layout="row" layout-align="center center">
+                <md-button aria-label="Twitter" class="md-grid-item-content" ng-click="shareCtrl.shareOnApp('TWITTER')">
+                    <md-icon md-svg-src="svg/twitter.svg" aria-label="Twitter" class="share-icon"></md-icon>
+                    <div class="md-grid-text">Twitter</div>
+                </md-button>
+                <md-button aria-label="Facebook" class="md-grid-item-content" ng-click="shareCtrl.shareOnApp('FACEBOOK')">
+                    <md-icon md-svg-src="svg/facebook.svg" aria-label="Facebook" class="share-icon"></md-icon>
+                    <div class="md-grid-text">Facebook</div>
+                </md-button>
+                <md-button aria-label="WhatsApp" class="md-grid-item-content" ng-click="shareCtrl.shareOnApp('WHATSAPP')">
+                    <md-icon md-svg-src="svg/whatsapp.svg" aria-label="WhatsApp" class="share-icon"></md-icon>
+                    <div class="md-grid-text">WhatsApp</div>
+                </md-button>
+            </md-list>
+        </div>
+    </md-bottom-sheet>
+</script>
