@@ -26,16 +26,14 @@ if( /(android)/i.test(navigator.userAgent) ) { // for android & amazon-fireos
 		banner: 'ca-app-pub-8439744074965483/8900243253', 
 		interstitial: 'ca-app-pub-8439744074965483/7423510059'
     };
-}
-    //08022016
-    else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios 
+} else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) { // for ios 
 	platform = platformios;
 	admobid = {
 		banner: 'ca-app-pub-8439744074965483/2445856051', 
 		interstitial: 'ca-app-pub-8439744074965483/8352788855'
 	};
 } 
-//08022016
+
 //Device Ready Event
 document.addEventListener("deviceready", onDeviceReadyAction, false);
 function onDeviceReadyAction() {
@@ -48,10 +46,8 @@ function onDeviceReadyAction() {
 
 	//Offset Topd Margin for IOS
 	offsetTop();
-
-
 }
-//08022016
+
 //Disclaimer
 function disclaimer() {
 	hidePopup();
@@ -65,7 +61,6 @@ function disclaimer() {
       }
     });	
 }
-
 
 //Load Initial Tips
 function loadInitialTips() {
@@ -181,7 +176,6 @@ function exitAppPopup() {
     return false;
 }
 
-//08022016
 /* Ad initialization & display */
 
 function initializeAd() {
@@ -282,7 +276,7 @@ function initializeFCM() {
 
 //Success Handler for FCM Resgistration
 function successHandlerFCM(result) {
-  //console.log("FCM Successfully Registered. Token: " + result);
+  console.log("FCM Successfully Registered. Token: " + result);
 }
 
 //Failure Handler for FCM Resgistration

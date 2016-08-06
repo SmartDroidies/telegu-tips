@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "781897556091",
-    "firebase_url": "https://admob-app-id-7727700457.firebaseio.com",
-    "project_id": "admob-app-id-7727700457",
-    "storage_bucket": "admob-app-id-7727700457.appspot.com"
+    "project_number": "270723948812",
+    "firebase_url": "https://telugu-tips-64a33.firebaseio.com",
+    "project_id": "telugu-tips-64a33",
+    "storage_bucket": "telugu-tips-64a33.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:781897556091:android:6695c9cf44fc07de",
-        "android_client_info": {
-          "package_name": "com.smart.droid.tamil.tips"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "781897556091-5a1kh9qra1021rdr5h2btcp1a595s4tu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBuoPVVSF4RbMR70x85TRqFqK_CHLU0vNA"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:781897556091:android:6a554bfc892007bb",
+        "mobilesdk_app_id": "1:270723948812:android:6a554bfc892007bb",
         "android_client_info": {
           "package_name": "com.smart.droid.telegu.tips"
         }
       },
       "oauth_client": [
         {
-          "client_id": "781897556091-5a1kh9qra1021rdr5h2btcp1a595s4tu.apps.googleusercontent.com",
+          "client_id": "270723948812-c0kppv8l07gjsvqsevm59ebm2hjvbdbv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuoPVVSF4RbMR70x85TRqFqK_CHLU0vNA"
+          "current_key": "AIzaSyA6PmY4TQeBAE3xW1AGc2xxWmS7jtos0TU"
         }
       ],
       "services": {

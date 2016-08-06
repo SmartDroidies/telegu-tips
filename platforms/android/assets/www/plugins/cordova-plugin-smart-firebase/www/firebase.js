@@ -15,9 +15,13 @@ var Firebase = {
     }
     */
 
-    trackEvent: function(key, value, success, error) {
-    	exec(success, error, "Firebase", "trackEvent", [key, value]);
+    event: function(key, value, success, error) {
+    	exec(success, error, "Firebase", "event", [key, value]);
 	},
+
+    exception: function(message, success, error) {
+        exec(success, error, "Firebase", "exception", [message]);
+    },
 
     getInstanceId: function(success, error) {
         exec(success, error, "Firebase", "getInstanceId", []);

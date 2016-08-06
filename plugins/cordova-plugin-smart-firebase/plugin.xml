@@ -14,8 +14,8 @@
 
         <framework src="com.google.firebase:firebase-core:9.2.0" />
         <framework src="com.google.firebase:firebase-messaging:9.2.0" />
-        <!--framework src="com.google.firebase:firebase-crash:9.0.2" />
-        <framework src="com.google.firebase:firebase-config:9.0.2" /-->
+        <framework src="com.google.firebase:firebase-crash:9.2.0" />
+        <framework src="com.google.firebase:firebase-config:9.2.0" />
 
         <config-file target="res/xml/config.xml" parent="/*">
           <feature name="Firebase">

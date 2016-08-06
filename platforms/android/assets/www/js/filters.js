@@ -17,7 +17,7 @@ telegutipsFilters.filter('feedicon', function($filter,$log) {
 		}
 	};
 });
-//08022016
+
 telegutipsFilters.filter('toLongDate', function($filter) {
 	return function(input) {
 		var _date = $filter('date')(new Date(input), 'MMM d, y h:mm a');

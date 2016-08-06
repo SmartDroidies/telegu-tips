@@ -255,7 +255,7 @@ angular.module('chitkalu.services', [])
 				var tipsCount = _.size(data.tips);
 				var pagemode = data.pagemode;
 				var page = data.page;
-				window.Firebase.trackEvent("Data Sync", "Set 1");
+				window.Firebase.event("Data Sync", "Set 1");
 				window.localStorage.setItem(C_KEY_TIPS, JSON.stringify(data.tips));
 				window.localStorage.setItem(C_KEY_SYNCTIME, data.time);
 				window.localStorage.setItem(C_KEY_DATAVERSION, C_DATA_VERSION);
@@ -275,7 +275,7 @@ angular.module('chitkalu.services', [])
 			syncCount = syncCount + 1;
 			$http.get(activeuri)
     			.then(function(response) {
-    				window.Firebase.trackEvent("Data Sync", "Set " + page);
+    				window.Firebase.event("Data Sync", "Set " + page);
     				var tipsCount = _.size(response.data.tips);
 					var pagemode = response.data.pagemode;
 					var page = response.data.page;

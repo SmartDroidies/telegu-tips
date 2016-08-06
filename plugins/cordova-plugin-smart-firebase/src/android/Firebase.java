@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -60,8 +61,11 @@ public class Firebase extends CordovaPlugin {
         } else if (action.equals("onNotificationOpen")) {
             //this.registerOnNotificationOpen(callbackContext);
             return true;
-        } else if (action.equals("trackEvent")) {
+        } else if (action.equals("event")) {
             this.trackEvent(callbackContext, args.getString(0), args.getString(1));
+            return true;
+        } else if (action.equals("exception")) {
+            this.trackException(callbackContext, args.getString(0));
             return true;
         }
         return false;
@@ -82,6 +86,20 @@ public class Firebase extends CordovaPlugin {
             }
         });
     }
+
+    private void trackException(final CallbackContext callbackContext, final String msg) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try {
+                    FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+                    callbackContext.success();
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
+    }
+
 
     private void getInstanceId(final CallbackContext callbackContext) {
         cordova.getThreadPool().execute(new Runnable() {

@@ -244,6 +244,8 @@ dependencies {
     compile "com.google.android.gms:play-services-ads:+"
     compile "com.google.firebase:firebase-core:9.2.0"
     compile "com.google.firebase:firebase-messaging:9.2.0"
+    compile "com.google.firebase:firebase-crash:9.2.0"
+    compile "com.google.firebase:firebase-config:9.2.0"
     // SUB-PROJECT DEPENDENCIES END
 }
 
