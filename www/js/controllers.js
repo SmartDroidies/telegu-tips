@@ -157,7 +157,7 @@ angular.module('chitkalu.controllers', [])
     // Display Tips
     this.displayTips = function (catId, favmode, searchtext) {
 
-      window.Firebase.trackEvent("Category Tips Listing", catId);
+      window.Firebase.event("Category Tips Listing", catId);
       var tempTips = TipList.getTips(catId, favmode, searchtext);
       //Store the latest recipie list for navigation
       TipList.storeTempTips(tempTips);
